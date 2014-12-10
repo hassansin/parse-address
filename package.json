@@ -1,0 +1,33 @@
+{
+  "name": "parse-address",
+  "version": "0.0.1",
+  "description": "Parsing US street addresses",
+  "main": "address.js",
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hassansin/parse-address.git"
+  },
+  "keywords": [
+    "extract",
+    "address",
+    "parser",
+    "address",
+    "street",
+    "US",
+    "Geo::StreetAddress::US",
+    "geo"
+  ],
+  "author": "hassansin <rezatxe@gmail.com> (https://github.com/hassansin)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hassansin/parse-address/issues"
+  },
+  "homepage": "https://github.com/hassansin/parse-address",
+  "dependencies": {
+    "underscore": "^1.7.0",
+    "xregexp": "^2.0.0"
+  }
+}
