@@ -1,10 +1,11 @@
 {
   "name": "parse-address",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "US Street Address Parser",
   "main": "address.js",
   "scripts": {
-    "test": "mocha -R spec"
+    "test": "node test",    
+    "build": "browserify address.js --standalone parseAddress | uglifyjs  > parse-address.min.js"
   },
   "repository": {
     "type": "git",
@@ -27,7 +28,6 @@
   },
   "homepage": "https://github.com/hassansin/parse-address",
   "dependencies": {
-    "underscore": "^1.7.0",
     "xregexp": "^2.0.0"
   }
 }

@@ -1,9 +1,16 @@
 //Perl Ref: http://cpansearch.perl.org/src/TIMB/Geo-StreetAddress-US-1.04/US.pm
 
 (function(){
-  "use strict";
-  var _ = require('underscore');
-  var XRegExp = require('xregexp').XRegExp;
+  var root;
+  root = this;
+  
+  if (typeof require !== "undefined"){
+    var XRegExp = require('xregexp').XRegExp;  
+  } 
+  else
+    var XRegExp = root.XRegExp;
+  
+  var parser = {};
   var Addr_Match = {};
 
   var Directional = {
@@ -517,24 +524,50 @@
   function capitalize(s){
     return s && s[0].toUpperCase() + s.slice(1);
   }
-
+  function keys(o){
+    return Object.keys(o);
+  }
+  function values(o){
+    var v = [];
+    keys(o).forEach(function(k){
+      v.push(o[k]);
+    })    
+    return v;
+  }
+  function each(o,fn){
+    keys(o).forEach(function(k){
+      fn(o[k],k);
+    });
+  }
+  function invert(o){
+    var o1= {};
+    keys(o).forEach(function(k){
+      o1[o[k]] = k;
+    });
+    return o1;
+  }
+  function flatten(o){
+    var arr=[];
+    return keys(o).concat(values(o));
+  }
   function init(){
 
-    Direction_Code = _.invert(Directional);
-    FIPS_State     = _.invert(State_FIPS);
+    Direction_Code = invert(Directional);
+    FIPS_State     = invert(State_FIPS);
 
+    /*
     var Street_Type_Match = {};
-    _.each(Street_Type,function(v,k){ Street_Type_Match[v] = XRegExp.escape(v) });
-    _.each(Street_Type,function(v,k){ Street_Type_Match[v] = Street_Type_Match[v] + "|" + XRegExp.escape(k); });
-    _.each(Street_Type_Match,function(v,k){ Street_Type_Match[k] = new RegExp( '\\b(?:' +  Street_Type_Match[k]  + ')\\b', 'i') });
-
+    each(Street_Type,function(v,k){ Street_Type_Match[v] = XRegExp.escape(v) });
+    each(Street_Type,function(v,k){ Street_Type_Match[v] = Street_Type_Match[v] + "|" + XRegExp.escape(k); });
+    each(Street_Type_Match,function(v,k){ Street_Type_Match[k] = new RegExp( '\\b(?:' +  Street_Type_Match[k]  + ')\\b', 'i') });
+    */
 
     Addr_Match = {
-      type    : _.chain(Street_Type).pairs().flatten().unique().value().join('|'),
+      type    : flatten(Street_Type).sort().filter(function(v,i,arr){return arr.indexOf(v)===i }).join('|'),
       fraction : '\\d+\\/\\d+',
-      state   : '\\b(?:' + _.keys(State_Code).concat(_.values(State_Code)).map(XRegExp.escape).join('|') + ')\\b',
-      direct  : _.keys(Directional).concat(_.chain(Directional).values().sortBy('length').map(function(v){return [v,XRegExp.escape(v.replace(/\w/g,'$&.'))]}).flatten().reverse().value()).join('|'),
-      dircode : _.keys(Direction_Code).join("|"),
+      state   : '\\b(?:' + keys(State_Code).concat(values(State_Code)).map(XRegExp.escape).join('|') + ')\\b',
+      direct  : values(Directional).sort(function(a,b){return a.length < b.length}).reduce(function(prev,curr){return prev.concat([XRegExp.escape(curr.replace(/\w/g,'$&.')),curr])},keys(Directional)).join('|'),
+      dircode : keys(Direction_Code).join("|"),
       zip     : '\\d{5}(?:-?\\d{4})?',
       corner  : '(?:\\band\\b|\\bat\\b|&|\\@)',
     };
@@ -649,7 +682,7 @@
       '+Addr_Match.place+'\\W*$','ix');    
   }  
   init();
-  var normalize_address = function(parts){
+  parser.normalize_address = function(parts){
     if(!parts)
       return null;
     var parsed = {};
@@ -676,25 +709,25 @@
     return parsed;
   };
 
-  var parseAddress = function(address){
+  parser.parseAddress = function(address){
     var parts = XRegExp.exec(address,Addr_Match.address);
-    return normalize_address(parts);
+    return parser.normalize_address(parts);
   };
-  var parseInformalAddress = function(address){
+  parser.parseInformalAddress = function(address){
     var parts = XRegExp.exec(address,Addr_Match.informal_address);
-    return normalize_address(parts);
+    return parser.normalize_address(parts);
   };
-  var parseLocation = function(address){
+  parser.parseLocation = function(address){
 
     if (XRegExp(Addr_Match.corner,'xi').test(address)) {
-        return parseIntersection(address);
+        return parser.parseIntersection(address);
     }
-    return parseAddress(address)
-        || parseInformalAddress(address);    
+    return parser.parseAddress(address)
+        || parser.parseInformalAddress(address);    
   };
-  var parseIntersection = function(address){
+  parser.parseIntersection = function(address){
     var parts = XRegExp.exec(address,Addr_Match.intersection);
-    parts = normalize_address(parts);
+    parts = parser.normalize_address(parts);
     if(parts){        
         parts.type2 = parts.type2 || '';
         parts.type1 = parts.type1 || '';
@@ -710,8 +743,22 @@
     return parts;    
   };
 
-  exports.parseIntersection = parseIntersection; 
-  exports.parseLocation = parseLocation;
-  exports.parseInformalAddress = parseInformalAddress;
-  exports.parseAddress = parseAddress;
-})();
+  // AMD / RequireJS
+  if (typeof define !== 'undefined' && define.amd) {
+      define([], function () {
+          return async;
+      });
+  }
+  // Node.js
+  else if (typeof exports !== "undefined") {
+    exports.parseIntersection = parser.parseIntersection; 
+    exports.parseLocation = parser.parseLocation;
+    exports.parseInformalAddress = parser.parseInformalAddress;
+    exports.parseAddress = parser.parseAddress;
+  }
+  // included directly via <script> tag
+  else {
+      root.addressParser = root.addressParser || parser;
+  }
+
+}());

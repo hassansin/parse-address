@@ -9,7 +9,7 @@ This is Node.js port for Perl [Geo::StreetAddress::US](http://search.cpan.org/~t
 ### Install:
 
 `npm install parse-address`
-
+`<script type="text/javascript" src="./parse-address.min.js"></script>
 ### Usage:
 
 ```javascript
