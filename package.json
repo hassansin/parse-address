@@ -1,7 +1,7 @@
 {
   "name": "parse-address",
-  "version": "0.0.2",
-  "description": "Parsing US street addresses",
+  "version": "0.0.3",
+  "description": "US Street Address Parser",
   "main": "address.js",
   "scripts": {
     "test": "mocha -R spec"

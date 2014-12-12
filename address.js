@@ -514,9 +514,6 @@
   var Direction_Code;
   var FIPS_State;
 
-  function escapeRegExp(string){
-    return string.replace(/([.*+?^${}()|\[\]\/\\])/g, "\\$1");
-  }
   function capitalize(s){
     return s && s[0].toUpperCase() + s.slice(1);
   }
@@ -527,16 +524,16 @@
     FIPS_State     = _.invert(State_FIPS);
 
     var Street_Type_Match = {};
-    _.each(Street_Type,function(v,k){ Street_Type_Match[v] = escapeRegExp(v) });
-    _.each(Street_Type,function(v,k){ Street_Type_Match[v] = Street_Type_Match[v] + "|" + escapeRegExp(k); });
+    _.each(Street_Type,function(v,k){ Street_Type_Match[v] = XRegExp.escape(v) });
+    _.each(Street_Type,function(v,k){ Street_Type_Match[v] = Street_Type_Match[v] + "|" + XRegExp.escape(k); });
     _.each(Street_Type_Match,function(v,k){ Street_Type_Match[k] = new RegExp( '\\b(?:' +  Street_Type_Match[k]  + ')\\b', 'i') });
 
 
     Addr_Match = {
       type    : _.chain(Street_Type).pairs().flatten().unique().value().join('|'),
       fraction : '\\d+\\/\\d+',
-      state   : '\\b(?:' + _.keys(State_Code).concat(_.values(State_Code)).map(escapeRegExp).join('|') + ')\\b',
-      direct  : _.keys(Directional).concat(_.chain(Directional).values().sortBy('length').map(function(v){return [v,escapeRegExp(v.replace(/\w/g,'$&.'))]}).flatten().reverse().value()).join('|'),
+      state   : '\\b(?:' + _.keys(State_Code).concat(_.values(State_Code)).map(XRegExp.escape).join('|') + ')\\b',
+      direct  : _.keys(Directional).concat(_.chain(Directional).values().sortBy('length').map(function(v){return [v,XRegExp.escape(v.replace(/\w/g,'$&.'))]}).flatten().reverse().value()).join('|'),
       dircode : _.keys(Direction_Code).join("|"),
       zip     : '\\d{5}(?:-?\\d{4})?',
       corner  : '(?:\\band\\b|\\bat\\b|&|\\@)',
@@ -566,7 +563,7 @@
       )';
     
     Addr_Match.sec_unit_type_numbered = '             \n\
-      (?<sec_unit_type>su?i?te                        \n\
+      (?<sec_unit_type_1>su?i?te                      \n\
         |p\\W*[om]\\W*b(?:ox)?                        \n\
         |(?:ap|dep)(?:ar)?t(?:me?nt)?                 \n\
         |ro*m                                         \n\
@@ -585,7 +582,7 @@
       ';        
 
     Addr_Match.sec_unit_type_unnumbered = '           \n\
-      (?<sec_unit_type>ba?se?me?n?t                   \n\
+      (?<sec_unit_type_2>ba?se?me?n?t                 \n\
         |fro?nt                                       \n\
         |lo?bby                                       \n\
         |lowe?r                                       \n\
@@ -596,17 +593,18 @@
         |uppe?r                                       \n\
       )\\b';
 
-    Addr_Match.sec_unit = '                             \n\
-      (?:                                               \n\
-        (?:                                             \n\
-          (?:'+Addr_Match.sec_unit_type_numbered+'\\W*) \n\
-          |(?<sec_unit_type>\\#)\\W*                    \n\
-        )                                               \n\
-        (?<sec_unit_num>[\\w-]+)                        \n\
-      )                                                 \n\
-      |                                                 \n\
-      '+Addr_Match.sec_unit_type_unnumbered+'           \n\
-      ';
+    Addr_Match.sec_unit = '                               \n\
+      (?:                               #fix3             \n\
+        (?:                             #fix1             \n\
+          (?:                                             \n\
+            (?:'+Addr_Match.sec_unit_type_numbered+'\\W*) \n\
+            |(?<sec_unit_type_3>\\#)\\W*                  \n\
+          )                                               \n\
+          (?<sec_unit_num_1>[\\w-]+)                      \n\
+        )                                                 \n\
+        |                                                 \n\
+        '+Addr_Match.sec_unit_type_unnumbered+'           \n\
+      )';
 
     Addr_Match.city_and_state = '                       \n\
       (?:                                               \n\
@@ -626,21 +624,21 @@
       ('+Addr_Match.number+')\\W*                       \n\
       (?:'+Addr_Match.fraction+'\\W*)?                  \n\
          '+Addr_Match.street+'\\W+                      \n\
-      (?:'+Addr_Match.sec_unit+'\\W+)?                  \n\
+      (?:'+Addr_Match.sec_unit+')?\\W*          #fix2   \n\
          '+Addr_Match.place+'                           \n\
       \\W*$','ix');    
 
-    var sep = '(?:\\W+)'; // no support for \Z
+    var sep = '(?:\\W+|$)'; // no support for \Z
 
-    Addr_Match.informal_address = XRegExp('         \n\
-      ^                                             \n\
-      \\s*         # skip leading whitespace        \n\
-      (?:'+Addr_Match.sec_unit+sep+')?              \n\
-      (?:'+Addr_Match.number+')?\\W*                \n\
-      (?:'+Addr_Match.fraction+'\\W*)?              \n\
-         '+Addr_Match.street+sep+'                  \n\
-      (?:'+Addr_Match.sec_unit+sep+')?              \n\
-      (?:'+Addr_Match.place+')?                     \n\
+    Addr_Match.informal_address = XRegExp('                   \n\
+      ^                                                       \n\
+      \\s*                                                    \n\
+      (?:'+Addr_Match.sec_unit+sep+')?                        \n\
+      (?:'+Addr_Match.number+')?\\W*                          \n\
+      (?:'+Addr_Match.fraction+'\\W*)?                        \n\
+         '+Addr_Match.street+sep+'                            \n\
+      (?:'+Addr_Match.sec_unit.replace(/_\d/g,'$&1')+sep+')?  \n\
+      (?:'+Addr_Match.place+')?                               \n\
       ','ix');
 
     Addr_Match.intersection = XRegExp('                     \n\
