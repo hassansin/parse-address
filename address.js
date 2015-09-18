@@ -1,14 +1,16 @@
 //Perl Ref: http://cpansearch.perl.org/src/TIMB/Geo-StreetAddress-US-1.04/US.pm
+"use strict";
 
 (function(){
   var root;
   root = this;
+  var XRegExp;
   
   if (typeof require !== "undefined"){
-    var XRegExp = require('xregexp').XRegExp;  
+     XRegExp = require('xregexp').XRegExp;  
   } 
   else
-    var XRegExp = root.XRegExp;
+    XRegExp = root.XRegExp;
   
   var parser = {};
   var Addr_Match = {};
@@ -531,7 +533,7 @@
     var v = [];
     keys(o).forEach(function(k){
       v.push(o[k]);
-    })    
+    });    
     return v;
   }
   function each(o,fn){
@@ -547,7 +549,6 @@
     return o1;
   }
   function flatten(o){
-    var arr=[];
     return keys(o).concat(values(o));
   }
   function init(){
@@ -686,7 +687,6 @@
     if(!parts)
       return null;
     var parsed = {};
-    var match;
 
     Object.keys(parts).forEach(function(k){
       if(['input','index'].indexOf(k) !== -1 || isFinite(k))
@@ -746,7 +746,7 @@
   // AMD / RequireJS
   if (typeof define !== 'undefined' && define.amd) {
       define([], function () {
-          return async;
+          return parser;
       });
   }
   // Node.js

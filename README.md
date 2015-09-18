@@ -1,4 +1,4 @@
-## US Street Address Parser
+## US Street Address Parser  [![Build Status](https://travis-ci.org/hassansin/parse-address.svg)](https://travis-ci.org/hassansin/parse-address)
 
 This is Node.js port for Perl [Geo::StreetAddress::US](http://search.cpan.org/~timb/Geo-StreetAddress-US-1.04/US.pm) package
 

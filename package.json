@@ -1,11 +1,11 @@
 {
   "name": "parse-address",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "US Street Address Parser",
   "main": "address.js",
   "scripts": {
     "test": "node test",    
-    "build": "browserify address.js --standalone parseAddress | uglifyjs  > parse-address.min.js"
+    "build": "./node_modules/browserify/bin/cmd.js address.js --standalone parseAddress | ./node_modules/uglifyjs/bin/uglifyjs  > parse-address.min.js"
   },
   "repository": {
     "type": "git",
