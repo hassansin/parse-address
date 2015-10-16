@@ -1,3 +1,5 @@
+// Copyright (c) 2014-2015, hassansin
+//
 //Perl Ref: http://cpansearch.perl.org/src/TIMB/Geo-StreetAddress-US-1.04/US.pm
 "use strict";
 
