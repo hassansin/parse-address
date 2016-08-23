@@ -30,7 +30,3 @@ var parsed = parseAddress.parseLocation('1005 N Gravenstein Highway Sebastopol C
  
 ```
  
-
-TODO:
-
-1. Freeform Address parser
