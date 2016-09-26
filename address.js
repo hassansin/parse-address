@@ -7,13 +7,13 @@
   var root;
   root = this;
   var XRegExp;
-  
+
   if (typeof require !== "undefined"){
-     XRegExp = require('xregexp').XRegExp;  
-  } 
+     XRegExp = require('xregexp/src/xregexp.js');
+  }
   else
     XRegExp = root.XRegExp;
-  
+
   var parser = {};
   var Addr_Match = {};
 
@@ -535,7 +535,7 @@
     var v = [];
     keys(o).forEach(function(k){
       v.push(o[k]);
-    });    
+    });
     return v;
   }
   function each(o,fn){
@@ -583,7 +583,7 @@
            (?<type_0>'+Addr_Match.type+')\\b                    \n\
         )                                                       \n\
         |                                                       \n\
-        (?:(?<prefix>'+Addr_Match.direct+')\\W+)?               \n\
+        (?:(?<prefix_0>'+Addr_Match.direct+')\\W+)?               \n\
         (?:                                                     \n\
           (?<street_1>[^,]*\\d)                                 \n\
           (?:[^\\w,]*(?<suffix_1>'+Addr_Match.direct+')\\b)     \n\
@@ -597,7 +597,7 @@
           (?:[^\\w,]+(?<suffix_3>'+Addr_Match.direct+')\\b)?    \n\
         )                                                       \n\
       )';
-    
+
     Addr_Match.sec_unit_type_numbered = '             \n\
       (?<sec_unit_type_1>su?i?te                      \n\
         |p\\W*[om]\\W*b(?:ox)?                        \n\
@@ -615,7 +615,7 @@
         |tra?i?le?r                                   \n\
         |box)(?![a-z]                                 \n\
       )                                               \n\
-      ';        
+      ';
 
     Addr_Match.sec_unit_type_unnumbered = '           \n\
       (?<sec_unit_type_2>ba?se?me?n?t                 \n\
@@ -662,7 +662,7 @@
          '+Addr_Match.street+'\\W+                      \n\
       (?:'+Addr_Match.sec_unit+')?\\W*          #fix2   \n\
          '+Addr_Match.place+'                           \n\
-      \\W*$','ix');    
+      \\W*$','ix');
 
     var sep = '(?:\\W+|$)'; // no support for \Z
 
@@ -682,8 +682,8 @@
       '+Addr_Match.street.replace(/_\d/g,'1$&')+'\\W*?      \n\
       \\s+'+Addr_Match.corner+'\\s+                         \n\
       '+Addr_Match.street.replace(/_\d/g,'2$&') + '\\W+     \n\
-      '+Addr_Match.place+'\\W*$','ix');    
-  }  
+      '+Addr_Match.place+'\\W*$','ix');
+  }
   init();
   parser.normalize_address = function(parts){
     if(!parts)
@@ -701,12 +701,12 @@
     if(parsed.city){
       parsed.city = XRegExp.replace(parsed.city,
         XRegExp('^(?<dircode>'+Addr_Match.dircode+')\\s+(?=\\S)','ix'),
-        function(match){     
+        function(match){
           return capitalize(Direction_Code[match.dircode.toUpperCase()]) +' ';
         });
     }
     if(parsed.zip){
-      parsed.zip = XRegExp.replace(parsed.zip,/^(.{5}).*/,'$1');            
+      parsed.zip = XRegExp.replace(parsed.zip,/^(.{5}).*/,'$1');
     }
     return parsed;
   };
@@ -725,24 +725,24 @@
         return parser.parseIntersection(address);
     }
     return parser.parseAddress(address)
-        || parser.parseInformalAddress(address);    
+        || parser.parseInformalAddress(address);
   };
   parser.parseIntersection = function(address){
     var parts = XRegExp.exec(address,Addr_Match.intersection);
     parts = parser.normalize_address(parts);
-    if(parts){        
+    if(parts){
         parts.type2 = parts.type2 || '';
         parts.type1 = parts.type1 || '';
-        if (parts.type2 && !parts.type1 || (parts.type1 === parts.type2)) {            
-            var type = parts.type2;     
+        if (parts.type2 && !parts.type1 || (parts.type1 === parts.type2)) {
+            var type = parts.type2;
             type = XRegExp.replace(type,/s\W*$/,'');
             if (XRegExp('^'+Addr_Match.type+'$','ix').test(type)) {
                 parts.type1 = parts.type2 = type;
             }
-        }    
+        }
     }
-    
-    return parts;    
+
+    return parts;
   };
 
   // AMD / RequireJS
@@ -753,7 +753,7 @@
   }
   // Node.js
   else if (typeof exports !== "undefined") {
-    exports.parseIntersection = parser.parseIntersection; 
+    exports.parseIntersection = parser.parseIntersection;
     exports.parseLocation = parser.parseLocation;
     exports.parseInformalAddress = parser.parseInformalAddress;
     exports.parseAddress = parser.parseAddress;
