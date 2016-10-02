@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Parse-address by hassansin</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Parse-address</h1>
+        <p>US Street Address Parser</p>
+
+        <p class="view"><a href="https://github.com/hassansin/parse-address">View the Project on GitHub <small>hassansin/parse-address</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/hassansin/parse-address/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/hassansin/parse-address/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/hassansin/parse-address">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>
+<a id="us-street-address-parser--" class="anchor" href="#us-street-address-parser--" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>US Street Address Parser  <a href="https://travis-ci.org/hassansin/parse-address"><img src="https://travis-ci.org/hassansin/parse-address.svg" alt="Build Status"></a>
+</h2>
+
+<p>This is Node.js port for Perl <a href="http://search.cpan.org/%7Etimb/Geo-StreetAddress-US-1.04/US.pm">Geo::StreetAddress::US</a> package</p>
+
+<p><em>Description from Geo::StreetAddress::US</em>:</p>
+
+<blockquote>
+<p>Geo::StreetAddress::US is a regex-based street address and street intersection parser for the United States. Its basic goal is to be as forgiving as possible when parsing user-provided address strings. Geo::StreetAddress::US knows about directional prefixes and suffixes, fractional building numbers, building units, grid-based addresses (such as those used in parts of Utah), 5 and 9 digit ZIP codes, and all of the official USPS abbreviations for street types and state names... <a href="http://search.cpan.org/%7Etimb/Geo-StreetAddress-US-1.04/US.pm">more</a></p>
+</blockquote>
+
+<h3>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage:</h3>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">//from node:</span>
+npm install parse<span class="pl-k">-</span>address
+<span class="pl-k">var</span> parser <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>parse-address<span class="pl-pds">'</span></span>); 
+<span class="pl-k">var</span> parsed <span class="pl-k">=</span> <span class="pl-smi">parser</span>.<span class="pl-en">parseLocation</span>(<span class="pl-s"><span class="pl-pds">'</span>1005 N Gravenstein Highway Sebastopol CA 95472<span class="pl-pds">'</span></span>);
+
+<span class="pl-c">//from browser:</span>
+<span class="pl-k">&lt;</span>script type<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span> src<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>./parse-address.min.js<span class="pl-pds">"</span></span><span class="pl-k">&gt;&lt;</span><span class="pl-k">/</span>script<span class="pl-k">&gt;</span>
+<span class="pl-k">var</span> parsed <span class="pl-k">=</span> <span class="pl-smi">parseAddress</span>.<span class="pl-en">parseLocation</span>(<span class="pl-s"><span class="pl-pds">'</span>1005 N Gravenstein Highway Sebastopol CA 95472<span class="pl-pds">'</span></span>);
+
+<span class="pl-c">//Parsed address:</span>
+{ 
+ number<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>1005<span class="pl-pds">'</span></span>,
+ prefix<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>N<span class="pl-pds">'</span></span>,
+ street<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Gravenstein<span class="pl-pds">'</span></span>,
+ type<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Highway<span class="pl-pds">'</span></span>,
+ city<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Sebastopol<span class="pl-pds">'</span></span>,
+ state<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>CA<span class="pl-pds">'</span></span>,
+ zip<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>95472<span class="pl-pds">'</span></span> }
+</pre></div>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/hassansin">hassansin</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
