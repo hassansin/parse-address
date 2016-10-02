@@ -41,6 +41,14 @@
 </blockquote>
 
 <h3>
+<a id="demo" class="anchor" href="#demo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Demo:</h3>
+<p>
+<input value="1005 N Gravenstein Highway Sebastopol CA 95472" type="text" id="addr"/> <button class="btn" id="parse-btn">Parse</button>
+<pre id="preview"></pre>
+
+</p>
+
+<h3>
 <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage:</h3>
 
 <div class="highlight highlight-source-js"><pre><span class="pl-c">//from node:</span>
@@ -69,6 +77,18 @@ npm install parse<span class="pl-k">-</span>address
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-    
+    <script src="javascripts/parse-address.min.js"></script>   
+    <script>
+		function demo() {
+			try{
+				var parsed = parseAddress.parseLocation(document.getElementById('addr').value);
+				document.getElementById('preview').innerHTML = JSON.stringify(parsed,null, 2);
+			} catch(e){
+				console.log(e);
+			}
+		}
+    	document.getElementById('parse-btn').addEventListener('click', demo);
+		demo();
+    </script>
   </body>
 </html>
