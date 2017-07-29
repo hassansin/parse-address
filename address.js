@@ -498,7 +498,7 @@
   function flatten(o){
     return keys(o).concat(values(o));
   }
-  function init(){
+  function lazyInit(){
     if (initialized) {
       return;
     }
@@ -633,7 +633,7 @@
       '+Addr_Match.place+'\\W*$','ix');
   }
   parser.normalize_address = function(parts){
-    init();
+    lazyInit();
     if(!parts)
       return null;
     var parsed = {};
@@ -660,17 +660,17 @@
   };
 
   parser.parseAddress = function(address){
-    init();
+    lazyInit();
     var parts = XRegExp.exec(address,Addr_Match.address);
     return parser.normalize_address(parts);
   };
   parser.parseInformalAddress = function(address){
-    init();
+    lazyInit();
     var parts = XRegExp.exec(address,Addr_Match.informal_address);
     return parser.normalize_address(parts);
   };
   parser.parseLocation = function(address){
-    init();
+    lazyInit();
     if (XRegExp(Addr_Match.corner,'xi').test(address)) {
         return parser.parseIntersection(address);
     }
@@ -678,7 +678,7 @@
         || parser.parseInformalAddress(address);
   };
   parser.parseIntersection = function(address){
-    init();
+    lazyInit();
     var parts = XRegExp.exec(address,Addr_Match.intersection);
     parts = parser.normalize_address(parts);
     if(parts){
