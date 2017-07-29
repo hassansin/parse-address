@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.0.7] - 2017-07-29
+
+### Changed
+- lazy init to avoid slow loading
+
 ## [0.0.6] - 2016-09-27
 
 ### Changed
