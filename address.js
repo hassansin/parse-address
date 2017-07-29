@@ -455,61 +455,6 @@
     "wyoming" : "WY",
   };
 
-  var State_FIPS = {
-    "01" : "AL",
-    "02" : "AK",
-    "04" : "AZ",
-    "05" : "AR",
-    "06" : "CA",
-    "08" : "CO",
-    "09" : "CT",
-    "10" : "DE",
-    "11" : "DC",
-    "12" : "FL",
-    "13" : "GA",
-    "15" : "HI",
-    "16" : "ID",
-    "17" : "IL",
-    "18" : "IN",
-    "19" : "IA",
-    "20" : "KS",
-    "21" : "KY",
-    "22" : "LA",
-    "23" : "ME",
-    "24" : "MD",
-    "25" : "MA",
-    "26" : "MI",
-    "27" : "MN",
-    "28" : "MS",
-    "29" : "MO",
-    "30" : "MT",
-    "31" : "NE",
-    "32" : "NV",
-    "33" : "NH",
-    "34" : "NJ",
-    "35" : "NM",
-    "36" : "NY",
-    "37" : "NC",
-    "38" : "ND",
-    "39" : "OH",
-    "40" : "OK",
-    "41" : "OR",
-    "42" : "PA",
-    "44" : "RI",
-    "45" : "SC",
-    "46" : "SD",
-    "47" : "TN",
-    "48" : "TX",
-    "49" : "UT",
-    "50" : "VT",
-    "51" : "VA",
-    "53" : "WA",
-    "54" : "WV",
-    "55" : "WI",
-    "56" : "WY",
-    "72" : "PR",
-    "78" : "VI",
-  };
   var Normalize_Map = {
     prefix  : Directional,
     prefix1 : Directional,
@@ -523,7 +468,7 @@
     state   : State_Code,
   };
   var Direction_Code;
-  var FIPS_State;
+  var initialized = false;
 
   function capitalize(s){
     return s && s[0].toUpperCase() + s.slice(1);
@@ -554,9 +499,12 @@
     return keys(o).concat(values(o));
   }
   function init(){
+    if (initialized) {
+      return;
+    }
+    initialized = true;
 
     Direction_Code = invert(Directional);
-    FIPS_State     = invert(State_FIPS);
 
     /*
     var Street_Type_Match = {};
@@ -684,8 +632,8 @@
       '+Addr_Match.street.replace(/_\d/g,'2$&') + '\\W+     \n\
       '+Addr_Match.place+'\\W*$','ix');
   }
-  init();
   parser.normalize_address = function(parts){
+    init();
     if(!parts)
       return null;
     var parsed = {};
@@ -712,15 +660,17 @@
   };
 
   parser.parseAddress = function(address){
+    init();
     var parts = XRegExp.exec(address,Addr_Match.address);
     return parser.normalize_address(parts);
   };
   parser.parseInformalAddress = function(address){
+    init();
     var parts = XRegExp.exec(address,Addr_Match.informal_address);
     return parser.normalize_address(parts);
   };
   parser.parseLocation = function(address){
-
+    init();
     if (XRegExp(Addr_Match.corner,'xi').test(address)) {
         return parser.parseIntersection(address);
     }
@@ -728,6 +678,7 @@
         || parser.parseInformalAddress(address);
   };
   parser.parseIntersection = function(address){
+    init();
     var parts = XRegExp.exec(address,Addr_Match.intersection);
     parts = parser.normalize_address(parts);
     if(parts){
