@@ -301,6 +301,7 @@
     roads       : "rds",
     route       : "rte",
     rvr         : "riv",
+    row         : "row",
     shoal       : "shl",
     shoals      : "shls",
     shoar       : "shr",
