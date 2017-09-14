@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.0.8] - 2017-08-15
+
+### Changed
+- added `Row` street type
+
 ## [0.0.7] - 2017-07-29
 
 ### Changed

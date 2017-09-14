@@ -301,6 +301,7 @@
     roads       : "rds",
     route       : "rte",
     rvr         : "riv",
+    row         : "row",
     shoal       : "shl",
     shoals      : "shls",
     shoar       : "shr",
@@ -455,18 +456,6 @@
     "wyoming" : "WY",
   };
 
-  var Normalize_Map = {
-    prefix  : Directional,
-    prefix1 : Directional,
-    prefix2 : Directional,
-    suffix  : Directional,
-    suffix1 : Directional,
-    suffix2 : Directional,
-    type    : Street_Type,
-    type1   : Street_Type,
-    type2   : Street_Type,
-    state   : State_Code,
-  };
   var Direction_Code;
   var initialized = false;
 
