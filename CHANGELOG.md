@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.0.9] - 2017-12-17
+
+### Changed
+- added `plus4` field for ZIP+4 code
+
 ## [0.0.8] - 2017-08-15
 
 ### Changed

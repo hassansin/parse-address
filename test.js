@@ -288,14 +288,16 @@ var address = {
     prefix: 'S',
     street: 'Wacker',
     type: 'Dr',
-    zip: '60606'
+    zip: '60606',
+    plus4: '6306'
   },
   '233 S Wacker Dr 606066306': {
     number: '233',
     prefix: 'S',
     street: 'Wacker',
     type: 'Dr',
-    zip: '60606'
+    zip: '60606',
+    plus4: '6306'
   },
   '233 S Wacker Dr lobby 60606': {
     number: '233',
