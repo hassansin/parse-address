@@ -508,7 +508,7 @@
       state   : '\\b(?:' + keys(State_Code).concat(values(State_Code)).map(XRegExp.escape).join('|') + ')\\b',
       direct  : values(Directional).sort(function(a,b){return a.length < b.length}).reduce(function(prev,curr){return prev.concat([XRegExp.escape(curr.replace(/\w/g,'$&.')),curr])},keys(Directional)).join('|'),
       dircode : keys(Direction_Code).join("|"),
-      zip     : '(?<zip>\\d{5})-?(?<plus4>\\d{4})?',
+      zip     : '(?<zip>\\d{5})[- ]?(?<plus4>\\d{4})?',
       corner  : '(?:\\band\\b|\\bat\\b|&|\\@)',
     };
 

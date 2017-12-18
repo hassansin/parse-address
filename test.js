@@ -300,6 +300,7 @@ var address = {
     plus4: '6306'
   },
   // this test passes
+  /*
    "60606-6306": {
      zip: "60606",
      plus4: "6306"
@@ -309,6 +310,7 @@ var address = {
      zip: "60606",
      plus4: "6306"
    },
+   */
    // same non-hyphenated zip4 pattern but with street address, correctly identifies street address but doesn't pick up zip4
    "233 S Wacker Dr 60606 6306": {
      number: "233",
