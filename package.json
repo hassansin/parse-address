@@ -4,7 +4,7 @@
   "description": "US Street Address Parser",
   "main": "address.js",
   "scripts": {
-    "test": "node test",
+    "test": "ava",
     "build": "./node_modules/browserify/bin/cmd.js address.js --standalone parseAddress | ./node_modules/.bin/uglifyjs  > parse-address.min.js"
   },
   "repository": {
@@ -28,6 +28,10 @@
   },
   "homepage": "https://github.com/hassansin/parse-address",
   "dependencies": {
+    "lodash": "^4.17.5",
     "xregexp": "^3.1.1"
+  },
+  "devDependencies": {
+    "ava": "^1.0.0-beta.3"
   }
 }
