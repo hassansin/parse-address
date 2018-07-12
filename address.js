@@ -460,6 +460,19 @@
   var Direction_Code;
   var initialized = false;
 
+  var Normalize_Map = {
+    prefix: Directional,
+    prefix1: Directional,
+    prefix2: Directional,
+    suffix: Directional,
+    suffix1: Directional,
+    suffix2: Directional,
+    type: Street_Type,
+    type1: Street_Type,
+    type2: Street_Type,
+    state: State_Code,
+  }
+
   function capitalize(s){
     return s && s[0].toUpperCase() + s.slice(1);
   }
@@ -636,14 +649,25 @@
       if(parts[k])
         parsed[key] = parts[k].trim().replace(/[^\w\s\-\#\&]/,'');
     });
+    each(Normalize_Map, function(map,key) {
+      if(parsed[key] && map[parsed[key].toLowerCase()]) {
+        parsed[key] = map[parsed[key].toLowerCase()];
+      }
+    });
+
+    ['type', 'type1', 'type2'].forEach(function(key){
+      if(key in parsed)
+        parsed[key] = parsed[key].charAt(0).toUpperCase() + parsed[key].slice(1).toLowerCase()
+    });
+
     if (this.avoid_redundant_street_type) {
       ['', '1', '2'].forEach(function (suffix) {
-          if(!parsed['street'+suffix]) return
-          if(!parsed['type'+suffix]) return
-          const type = parsed['type'+suffix]
-          const type_regex = Street_Type_Match[type.toLowerCase()]
-          if(!type_regex) return // Perl calls die here. Should we?
-          parsed['type'+suffix] =  || type.toLowerCase()
+          if(!parsed['street'+suffix]) return;
+          if(!parsed['type'+suffix]) return;
+          const type = parsed['type'+suffix];
+          const type_regex = Street_Type_Match[type.toLowerCase()];
+          if(!type_regex) return; // Perl calls die here. Should we?
+          if(type_regex.match(parsed['street'+suffix])) parsed['type'+suffix] = undefined;
       })
     }
     if(parsed.city){
