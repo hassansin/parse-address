@@ -388,5 +388,4 @@ var address = {
 Object.keys(address).forEach(function (k) {
   var parsed = parser.parseLocation(k);
   assert.deepEqual(address[k], parsed);
-  console.log(JSON.stringify({[k]: parsed}))
 });
