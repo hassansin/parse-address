@@ -635,7 +635,6 @@
       '+Addr_Match.street.replace(/_\d/g,'2$&') + '\\W+     \n\
       '+Addr_Match.place+'\\W*$','ix');
   }
-  parser.avoid_redundant_street_type = true
   parser.normalize_address = function(parts){
     lazyInit();
     if(!parts)
@@ -660,16 +659,6 @@
         parsed[key] = parsed[key].charAt(0).toUpperCase() + parsed[key].slice(1).toLowerCase()
     });
 
-    if (this.avoid_redundant_street_type) {
-      ['', '1', '2'].forEach(function (suffix) {
-          if(!parsed['street'+suffix]) return;
-          if(!parsed['type'+suffix]) return;
-          const type = parsed['type'+suffix];
-          const type_regex = Street_Type_Match[type.toLowerCase()];
-          if(!type_regex) return;
-          if(type_regex.match(parsed['street'+suffix])) delete parsed['type'+suffix];
-      })
-    }
     if(parsed.city){
       parsed.city = XRegExp.replace(parsed.city,
         XRegExp('^(?<dircode>'+Addr_Match.dircode+')\\s+(?=\\S)','ix'),
