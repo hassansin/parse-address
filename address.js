@@ -655,7 +655,7 @@
 
     ['type', 'type1', 'type2'].forEach(function(key){
       if(key in parsed)
-        parsed[key] = parsed[key].charAt(0).toUpperCase() + parsed[key].slice(1).toLowerCase()
+        parsed[key] = parsed[key].charAt(0).toUpperCase() + parsed[key].slice(1).toLowerCase();
     });
 
     if(parsed.city){
