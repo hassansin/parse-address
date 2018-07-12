@@ -24,368 +24,373 @@ var address = {
   '1005 Gravenstein Highway North, 95472': {
     number: '1005',
     street: 'Gravenstein',
-    type: 'Highway',
-    suffix: 'North',
+    type: 'Hwy',
+    suffix: 'N',
     zip: '95472'
   },
   '1005 N Gravenstein Highway, Sebastopol, CA': {
     number: '1005',
     prefix: 'N',
     street: 'Gravenstein',
-    type: 'Highway',
+    type: 'Hwy',
     city: 'Sebastopol',
     state: 'CA'
   },
   '1005 N Gravenstein Highway, Suite 500, Sebastopol, CA': {
-    number: '1005',
-    prefix: 'N',
+    type: 'Hwy',
     street: 'Gravenstein',
-    type: 'Highway',
-    sec_unit_type: 'Suite',
-    sec_unit_num: '500',
     city: 'Sebastopol',
-    state: 'CA'
+    state: 'CA',
+    prefix: 'N',
+    sec_unit_num: '500',
+    sec_unit_type: 'Suite',
+    number: '1005'
   },
   '1005 N Gravenstein Hwy Suite 500 Sebastopol, CA': {
     number: '1005',
-    prefix: 'N',
-    street: 'Gravenstein',
     type: 'Hwy',
-    sec_unit_type: 'Suite',
-    sec_unit_num: '500',
     city: 'Sebastopol',
-    state: 'CA'
+    state: 'CA',
+    sec_unit_type: 'Suite',
+    street: 'Gravenstein',
+    prefix: 'N',
+    sec_unit_num: '500'
   },
   '1005 N Gravenstein Highway, Sebastopol, CA, 95472': {
-    number: '1005',
-    prefix: 'N',
-    street: 'Gravenstein',
-    type: 'Highway',
-    city: 'Sebastopol',
     state: 'CA',
-    zip: '95472'
+    number: '1005',
+    zip: '95472',
+    prefix: 'N',
+    city: 'Sebastopol',
+    street: 'Gravenstein',
+    type: 'Hwy'
   },
   '1005 N Gravenstein Highway Sebastopol CA 95472': {
-    number: '1005',
-    prefix: 'N',
     street: 'Gravenstein',
-    type: 'Highway',
-    city: 'Sebastopol',
+    zip: '95472',
+    prefix: 'N',
     state: 'CA',
-    zip: '95472'
+    number: '1005',
+    city: 'Sebastopol',
+    type: 'Hwy'
   },
   '1005 Gravenstein Hwy N Sebastopol CA': {
-    number: '1005',
     street: 'Gravenstein',
-    type: 'Hwy',
-    suffix: 'N',
+    state: 'CA',
     city: 'Sebastopol',
-    state: 'CA'
+    suffix: 'N',
+    number: '1005',
+    type: 'Hwy'
   },
   '1005 Gravenstein Hwy N, Sebastopol CA': {
-    number: '1005',
-    street: 'Gravenstein',
     type: 'Hwy',
+    number: '1005',
     suffix: 'N',
     city: 'Sebastopol',
+    street: 'Gravenstein',
     state: 'CA'
   },
   '1005 Gravenstein Hwy, N Sebastopol CA': {
-    number: '1005',
     street: 'Gravenstein',
-    type: 'Hwy',
+    number: '1005',
+    state: 'CA',
     city: 'North Sebastopol',
-    state: 'CA'
+    type: 'Hwy'
   },
   '1005 Gravenstein Hwy, North Sebastopol CA': {
-    number: '1005',
-    street: 'Gravenstein',
     type: 'Hwy',
-    city: 'North Sebastopol',
-    state: 'CA'
+    street: 'Gravenstein',
+    state: 'CA',
+    number: '1005',
+    city: 'North Sebastopol'
   },
   '1005 Gravenstein Hwy Sebastopol CA': {
     number: '1005',
-    street: 'Gravenstein',
     type: 'Hwy',
     city: 'Sebastopol',
-    state: 'CA'
+    state: 'CA',
+    street: 'Gravenstein'
   },
   '115 Broadway San Francisco CA': {
-    number: '115',
     street: 'Broadway',
+    type: '',
     city: 'San Francisco',
-    state: 'CA'
+    state: 'CA',
+    number: '115'
   },
   '7800 Mill Station Rd, Sebastopol, CA 95472': {
-    number: '7800',
-    street: 'Mill Station',
-    type: 'Rd',
-    city: 'Sebastopol',
     state: 'CA',
-    zip: '95472'
+    type: 'Rd',
+    street: 'Mill Station',
+    zip: '95472',
+    city: 'Sebastopol',
+    number: '7800'
   },
   '7800 Mill Station Rd Sebastopol CA 95472': {
     number: '7800',
-    street: 'Mill Station',
-    type: 'Rd',
     city: 'Sebastopol',
+    zip: '95472',
     state: 'CA',
-    zip: '95472'
+    type: 'Rd',
+    street: 'Mill Station'
   },
   '1005 State Highway 116 Sebastopol CA 95472': {
-    number: '1005',
-    street: 'State Highway 116',
+    type: 'Hwy',
     city: 'Sebastopol',
+    zip: '95472',
     state: 'CA',
-    zip: '95472'
+    street: 'State Highway 116',
+    number: '1005'
   },
   '1600 Pennsylvania Ave. Washington DC': {
-    number: '1600',
+    state: 'DC',
     street: 'Pennsylvania',
     type: 'Ave',
-    city: 'Washington',
-    state: 'DC'
+    number: '1600',
+    city: 'Washington'
   },
   '1600 Pennsylvania Avenue Washington DC': {
     number: '1600',
     street: 'Pennsylvania',
-    type: 'Avenue',
-    city: 'Washington',
-    state: 'DC'
+    state: 'DC',
+    type: 'Ave',
+    city: 'Washington'
   },
   '48S 400E, Salt Lake City UT': {
-    number: '48',
     prefix: 'S',
     street: '400',
-    suffix: 'E',
     city: 'Salt Lake City',
-    state: 'UT'
+    number: '48',
+    state: 'UT',
+    suffix: 'E',
+    type: ''
   },
   '550 S 400 E #3206, Salt Lake City UT 84111': {
-    number: '550',
-    prefix: 'S',
-    street: '400',
     suffix: 'E',
-    sec_unit_type: '#',
+    type: '',
+    number: '550',
     sec_unit_num: '3206',
-    city: 'Salt Lake City',
+    prefix: 'S',
     state: 'UT',
-    zip: '84111'
+    sec_unit_type: '#',
+    city: 'Salt Lake City',
+    zip: '84111',
+    street: '400'
   },
   '6641 N 2200 W Apt D304 Park City, UT 84098': {
-    number: '6641',
-    prefix: 'N',
-    street: '2200',
-    suffix: 'W',
-    sec_unit_type: 'Apt',
-    sec_unit_num: 'D304',
     city: 'Park City',
+    sec_unit_num: 'D304',
+    prefix: 'N',
+    type: '',
+    number: '6641',
+    sec_unit_type: 'Apt',
     state: 'UT',
+    suffix: 'W',
+    street: '2200',
     zip: '84098'
   },
   '100 South St, Philadelphia, PA': {
-    number: '100',
     street: 'South',
-    type: 'St',
     city: 'Philadelphia',
-    state: 'PA'
+    state: 'PA',
+    type: 'St',
+    number: '100'
   },
   '100 S.E. Washington Ave, Minneapolis, MN': {
-    number: '100',
-    prefix: 'SE.',
-    street: 'Washington',
-    type: 'Ave',
     city: 'Minneapolis',
-    state: 'MN'
+    type: 'Ave',
+    state: 'MN',
+    street: 'Washington',
+    prefix: 'SE',
+    number: '100'
   },
   '3813 1/2 Some Road, Los Angeles, CA': {
     number: '3813',
     street: 'Some',
-    type: 'Road',
-    city: 'Los Angeles',
-    state: 'CA'
+    type: 'Rd',
+    state: 'CA',
+    city: 'Los Angeles'
   },
   'Mission & Valencia San Francisco CA': {
-    street1: 'Mission',
-    street2: 'Valencia',
-    city: 'San Francisco',
-    state: 'CA',
     type2: '',
-    type1: ''
+    street2: 'Valencia',
+    state: 'CA',
+    city: 'San Francisco',
+    type1: '',
+    street1: 'Mission'
   },
   'Mission & Valencia, San Francisco CA': {
-    street1: 'Mission',
-    street2: 'Valencia',
+    type1: '',
     city: 'San Francisco',
-    state: 'CA',
     type2: '',
-    type1: ''
+    street1: 'Mission',
+    state: 'CA',
+    street2: 'Valencia'
   },
   'Mission St and Valencia St San Francisco CA': {
-    street1: 'Mission',
     type1: 'St',
-    street2: 'Valencia',
-    type2: 'St',
-    city: 'San Francisco',
-    state: 'CA'
-  },
-  'Mission St & Valencia St San Francisco CA': {
-    street1: 'Mission',
-    type1: 'St',
-    street2: 'Valencia',
-    type2: 'St',
-    city: 'San Francisco',
-    state: 'CA'
-  },
-  'Mission and Valencia Sts San Francisco CA': {
-    street1: 'Mission',
-    street2: 'Valencia',
-    type2: 'St',
     city: 'San Francisco',
     state: 'CA',
+    street2: 'Valencia',
+    type2: 'St',
+    street1: 'Mission'
+  },
+  'Mission St & Valencia St San Francisco CA': {
+    street2: 'Valencia',
+    state: 'CA',
+    street1: 'Mission',
+    type2: 'St',
+    city: 'San Francisco',
     type1: 'St'
+  },
+  'Mission and Valencia Sts San Francisco CA': {
+    type2: 'St',
+    street1: 'Mission',
+    type1: 'St',
+    city: 'San Francisco',
+    street2: 'Valencia',
+    state: 'CA'
   },
   'Mission & Valencia Sts. San Francisco CA': {
     street1: 'Mission',
     street2: 'Valencia',
-    type2: 'St',
+    type1: 'St',
     city: 'San Francisco',
     state: 'CA',
-    type1: 'St'
+    type2: 'St'
   },
   'Mission & Valencia Streets San Francisco CA': {
     street1: 'Mission',
-    street2: 'Valencia',
-    type2: 'Street',
+    type2: 'St',
     city: 'San Francisco',
     state: 'CA',
-    type1: 'Street'
+    type1: 'St',
+    street2: 'Valencia'
   },
   'Mission Avenue and Valencia Street San Francisco CA': {
-    street1: 'Mission',
-    type1: 'Avenue',
-    street2: 'Valencia',
-    type2: 'Street',
+    type1: 'Ave',
+    state: 'CA',
     city: 'San Francisco',
-    state: 'CA'
+    street1: 'Mission',
+    type2: 'St',
+    street2: 'Valencia'
   },
   '1 First St, e San Jose CA': {
-    number: '1',
     street: 'First',
-    type: 'St',
+    number: '1',
     city: 'East San Jose',
-    state: 'CA'
+    state: 'CA',
+    type: 'St'
   },
   '123 Maple Rochester, New York': {
-    number: '123',
-    street: 'Maple',
     city: 'Rochester',
-    state: 'New York'
+    street: 'Maple',
+    number: '123',
+    state: 'NY',
+    type: ''
   },
   '233 S Wacker Dr 60606-6306': {
+    type: 'Dr',
     number: '233',
     prefix: 'S',
-    street: 'Wacker',
-    type: 'Dr',
     zip: '60606',
-    plus4: '6306'
+    street: 'Wacker'
   },
   '233 S Wacker Dr 606066306': {
-    number: '233',
-    prefix: 'S',
     street: 'Wacker',
-    type: 'Dr',
     zip: '60606',
-    plus4: '6306'
-  },
-   "233 S Wacker Dr 60606 6306": {
-     number: "233",
-     prefix: "S",
-     street: "Wacker",
-     type: "Dr",
-     zip: "60606",
-     plus4: "6306"
-   },
-   "S Wacker Dr 60606 6306": {
-     prefix: "S",
-     street: "Wacker",
-     type: "Dr",
-     zip: "60606",
-     plus4: "6306"
-   },
-  '233 S Wacker Dr lobby 60606': {
-    number: '233',
-    prefix: 'S',
-    street: 'Wacker',
     type: 'Dr',
+    number: '233',
+    prefix: 'S'
+  },
+  '233 S Wacker Dr 60606 6306': {
+    type: 'Dr',
+    prefix: 'S',
+    zip: '60606',
+    street: 'Wacker',
+    number: '233'
+  },
+  'S Wacker Dr 60606 6306': {
+    zip: '60606',
+    type: 'Dr',
+    street: 'Wacker',
+    prefix: 'S'
+  },
+  '233 S Wacker Dr lobby 60606': {
     sec_unit_type: 'lobby',
+    prefix: 'S',
+    type: 'Dr',
+    number: '233',
+    street: 'Wacker',
     zip: '60606'
   },
   '(233 S Wacker Dr lobby 60606)': {
-    number: '233',
-    prefix: 'S',
+    zip: '60606',
+    sec_unit_type: 'lobby',
     street: 'Wacker',
     type: 'Dr',
-    sec_unit_type: 'lobby',
-    zip: '60606'
+    number: '233',
+    prefix: 'S'
   },
   '#42 233 S Wacker Dr 60606': {
-    sec_unit_type: '#',
-    sec_unit_num: '42',
-    number: '233',
-    prefix: 'S',
-    street: 'Wacker',
     type: 'Dr',
-    zip: '60606'
+    prefix: 'S',
+    zip: '60606',
+    sec_unit_num: '42',
+    sec_unit_type: '#',
+    number: '233',
+    street: 'Wacker'
   },
   'lt42 99 Some Road, Some City LA': {
-    sec_unit_type: 'lt',
-    sec_unit_num: '42',
-    number: '99',
-    street: 'Some',
-    type: 'Road',
     city: 'Some City',
-    state: 'LA'
+    state: 'LA',
+    type: 'Rd',
+    sec_unit_type: 'lt',
+    street: 'Some',
+    number: '99',
+    sec_unit_num: '42'
   },
   '36401 County Road 43, Eaton, CO 80615': {
-    number: '36401',
+    type: 'Rd',
     street: 'County Road 43',
-    city: 'Eaton',
+    number: '36401',
+    zip: '80615',
     state: 'CO',
-    zip: '80615'
+    city: 'Eaton'
   },
   '1234 COUNTY HWY 60E, Town, CO 12345': {
-    number: '1234',
-    street: 'COUNTY HWY 60',
     suffix: 'E',
-    city: 'Town',
     state: 'CO',
-    zip: '12345'
+    type: '',
+    zip: '12345',
+    number: '1234',
+    city: 'Town',
+    street: 'COUNTY HWY 60'
   },
   '321 S. Washington': {
-    number: '321',
     prefix: 'S',
-    street: 'Washington'
+    street: 'Washington',
+    type: '',
+    number: '321'
   },
   '\'45 Quaker Ave, Ste 105\'': {
-    number: '45',
-    street: 'Quaker',
-    type: 'Ave',
     sec_unit_type: 'Ste',
+    street: 'Quaker',
+    number: '45',
+    type: 'Ave',
     sec_unit_num: '105'
   },
   '2672 Industrial Row Troy, MI 48084': {
+    zip: '48084',
+    city: 'Row Troy',
     number: '2672',
-    street: 'Industrial',
-    type: 'Row',
-    city: 'Troy',
     state: 'MI',
-    zip: '48084'
+    type: '',
+    street: 'Industrial'
   }
 };
 
-Object.keys(address).forEach(function(k) {
+Object.keys(address).forEach(function (k) {
   var parsed = parser.parseLocation(k);
   assert.deepEqual(address[k], parsed);
 });
