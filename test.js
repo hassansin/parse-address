@@ -196,7 +196,7 @@ var address = {
     type: 'Ave',
     state: 'MN',
     street: 'Washington',
-    prefix: 'SE.',
+    prefix: 'SE',
     number: '100'
   },
   '3813 1/2 Some Road, Los Angeles, CA': {
