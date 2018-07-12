@@ -16,7 +16,6 @@
 
   var parser = {};
   var Addr_Match = {};
-  var Street_Type_Match = {};
 
   var Directional = {
     north       : "N",
@@ -509,12 +508,12 @@
 
     Direction_Code = invert(Directional);
 
-
+    /*
     var Street_Type_Match = {};
     each(Street_Type,function(v,k){ Street_Type_Match[v] = XRegExp.escape(v) });
     each(Street_Type,function(v,k){ Street_Type_Match[v] = Street_Type_Match[v] + "|" + XRegExp.escape(k); });
     each(Street_Type_Match,function(v,k){ Street_Type_Match[k] = new RegExp( '\\b(?:' +  Street_Type_Match[k]  + ')\\b', 'i') });
-
+    */
 
     Addr_Match = {
       type    : flatten(Street_Type).sort().filter(function(v,i,arr){return arr.indexOf(v)===i }).join('|'),
