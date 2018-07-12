@@ -113,7 +113,6 @@ var address = {
   },
   '115 Broadway San Francisco CA': {
     street: 'Broadway',
-    type: '',
     city: 'San Francisco',
     state: 'CA',
     number: '115'
@@ -135,7 +134,6 @@ var address = {
     street: 'Mill Station'
   },
   '1005 State Highway 116 Sebastopol CA 95472': {
-    type: 'Hwy',
     city: 'Sebastopol',
     zip: '95472',
     state: 'CA',
@@ -162,12 +160,10 @@ var address = {
     city: 'Salt Lake City',
     number: '48',
     state: 'UT',
-    suffix: 'E',
-    type: ''
+    suffix: 'E'
   },
   '550 S 400 E #3206, Salt Lake City UT 84111': {
     suffix: 'E',
-    type: '',
     number: '550',
     sec_unit_num: '3206',
     prefix: 'S',
@@ -181,7 +177,6 @@ var address = {
     city: 'Park City',
     sec_unit_num: 'D304',
     prefix: 'N',
-    type: '',
     number: '6641',
     sec_unit_type: 'Apt',
     state: 'UT',
@@ -201,7 +196,7 @@ var address = {
     type: 'Ave',
     state: 'MN',
     street: 'Washington',
-    prefix: 'SE',
+    prefix: 'SE.',
     number: '100'
   },
   '3813 1/2 Some Road, Los Angeles, CA': {
@@ -286,35 +281,38 @@ var address = {
     city: 'Rochester',
     street: 'Maple',
     number: '123',
-    state: 'NY',
-    type: ''
+    state: 'NY'
   },
   '233 S Wacker Dr 60606-6306': {
     type: 'Dr',
     number: '233',
     prefix: 'S',
     zip: '60606',
-    street: 'Wacker'
+    street: 'Wacker',
+    plus4: '6306'
   },
   '233 S Wacker Dr 606066306': {
     street: 'Wacker',
     zip: '60606',
     type: 'Dr',
     number: '233',
-    prefix: 'S'
+    prefix: 'S',
+    plus4: '6306'
   },
   '233 S Wacker Dr 60606 6306': {
     type: 'Dr',
     prefix: 'S',
     zip: '60606',
     street: 'Wacker',
-    number: '233'
+    number: '233',
+    plus4: '6306'
   },
   'S Wacker Dr 60606 6306': {
     zip: '60606',
     type: 'Dr',
     street: 'Wacker',
-    prefix: 'S'
+    prefix: 'S',
+    plus4: '6306'
   },
   '233 S Wacker Dr lobby 60606': {
     sec_unit_type: 'lobby',
@@ -351,7 +349,6 @@ var address = {
     sec_unit_num: '42'
   },
   '36401 County Road 43, Eaton, CO 80615': {
-    type: 'Rd',
     street: 'County Road 43',
     number: '36401',
     zip: '80615',
@@ -361,7 +358,6 @@ var address = {
   '1234 COUNTY HWY 60E, Town, CO 12345': {
     suffix: 'E',
     state: 'CO',
-    type: '',
     zip: '12345',
     number: '1234',
     city: 'Town',
@@ -370,7 +366,6 @@ var address = {
   '321 S. Washington': {
     prefix: 'S',
     street: 'Washington',
-    type: '',
     number: '321'
   },
   '\'45 Quaker Ave, Ste 105\'': {
@@ -382,10 +377,10 @@ var address = {
   },
   '2672 Industrial Row Troy, MI 48084': {
     zip: '48084',
-    city: 'Row Troy',
+    type: 'Row',
+    city: 'Troy',
     number: '2672',
     state: 'MI',
-    type: '',
     street: 'Industrial'
   }
 };
