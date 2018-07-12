@@ -16,6 +16,7 @@
 
   var parser = {};
   var Addr_Match = {};
+  var Street_Type_Match = {};
 
   var Directional = {
     north       : "N",
@@ -495,12 +496,12 @@
 
     Direction_Code = invert(Directional);
 
-    /*
+
     var Street_Type_Match = {};
     each(Street_Type,function(v,k){ Street_Type_Match[v] = XRegExp.escape(v) });
     each(Street_Type,function(v,k){ Street_Type_Match[v] = Street_Type_Match[v] + "|" + XRegExp.escape(k); });
     each(Street_Type_Match,function(v,k){ Street_Type_Match[k] = new RegExp( '\\b(?:' +  Street_Type_Match[k]  + ')\\b', 'i') });
-    */
+
 
     Addr_Match = {
       type    : flatten(Street_Type).sort().filter(function(v,i,arr){return arr.indexOf(v)===i }).join('|'),
@@ -621,6 +622,7 @@
       '+Addr_Match.street.replace(/_\d/g,'2$&') + '\\W+     \n\
       '+Addr_Match.place+'\\W*$','ix');
   }
+  parser.avoid_redundant_street_type = true
   parser.normalize_address = function(parts){
     lazyInit();
     if(!parts)
@@ -634,7 +636,16 @@
       if(parts[k])
         parsed[key] = parts[k].trim().replace(/[^\w\s\-\#\&]/,'');
     });
-
+    if (this.avoid_redundant_street_type) {
+      ['', '1', '2'].forEach(function (suffix) {
+          if(!parsed['street'+suffix]) return
+          if(!parsed['type'+suffix]) return
+          const type = parsed['type'+suffix]
+          const type_regex = Street_Type_Match[type.toLowerCase()]
+          if(!type_regex) return // Perl calls die here. Should we?
+          parsed['type'+suffix] =  || type.toLowerCase()
+      })
+    }
     if(parsed.city){
       parsed.city = XRegExp.replace(parsed.city,
         XRegExp('^(?<dircode>'+Addr_Match.dircode+')\\s+(?=\\S)','ix'),
