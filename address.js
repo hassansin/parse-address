@@ -666,8 +666,8 @@
           if(!parsed['type'+suffix]) return;
           const type = parsed['type'+suffix];
           const type_regex = Street_Type_Match[type.toLowerCase()];
-          if(!type_regex) return; // Perl calls die here. Should we?
-          if(type_regex.match(parsed['street'+suffix])) parsed['type'+suffix] = undefined;
+          if(!type_regex) return;
+          if(type_regex.match(parsed['street'+suffix])) delete parsed['type'+suffix];
       })
     }
     if(parsed.city){
