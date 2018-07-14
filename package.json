@@ -1,6 +1,6 @@
 {
   "name": "parse-address",
-  "version": "0.0.10",
+  "version": "1.0.0",
   "description": "US Street Address Parser",
   "main": "address.js",
   "scripts": {
