@@ -459,6 +459,19 @@
   var Direction_Code;
   var initialized = false;
 
+  var Normalize_Map = {
+    prefix: Directional,
+    prefix1: Directional,
+    prefix2: Directional,
+    suffix: Directional,
+    suffix1: Directional,
+    suffix2: Directional,
+    type: Street_Type,
+    type1: Street_Type,
+    type2: Street_Type,
+    state: State_Code,
+  }
+
   function capitalize(s){
     return s && s[0].toUpperCase() + s.slice(1);
   }
@@ -632,7 +645,17 @@
         return;
       var key = isFinite(k.split('_').pop())? k.split('_').slice(0,-1).join('_'): k ;
       if(parts[k])
-        parsed[key] = parts[k].trim().replace(/[^\w\s\-\#\&]/,'');
+        parsed[key] = parts[k].trim().replace(/^\s+|\s+$|[^\w\s\-#&]/g, '');
+    });
+    each(Normalize_Map, function(map,key) {
+      if(parsed[key] && map[parsed[key].toLowerCase()]) {
+        parsed[key] = map[parsed[key].toLowerCase()];
+      }
+    });
+
+    ['type', 'type1', 'type2'].forEach(function(key){
+      if(key in parsed)
+        parsed[key] = parsed[key].charAt(0).toUpperCase() + parsed[key].slice(1).toLowerCase();
     });
 
     if(parsed.city){

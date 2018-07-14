@@ -24,15 +24,15 @@ var address = {
   '1005 Gravenstein Highway North, 95472': {
     number: '1005',
     street: 'Gravenstein',
-    type: 'Highway',
-    suffix: 'North',
+    type: 'Hwy',
+    suffix: 'N',
     zip: '95472'
   },
   '1005 N Gravenstein Highway, Sebastopol, CA': {
     number: '1005',
     prefix: 'N',
     street: 'Gravenstein',
-    type: 'Highway',
+    type: 'Hwy',
     city: 'Sebastopol',
     state: 'CA'
   },
@@ -40,7 +40,7 @@ var address = {
     number: '1005',
     prefix: 'N',
     street: 'Gravenstein',
-    type: 'Highway',
+    type: 'Hwy',
     sec_unit_type: 'Suite',
     sec_unit_num: '500',
     city: 'Sebastopol',
@@ -60,7 +60,7 @@ var address = {
     number: '1005',
     prefix: 'N',
     street: 'Gravenstein',
-    type: 'Highway',
+    type: 'Hwy',
     city: 'Sebastopol',
     state: 'CA',
     zip: '95472'
@@ -69,7 +69,7 @@ var address = {
     number: '1005',
     prefix: 'N',
     street: 'Gravenstein',
-    type: 'Highway',
+    type: 'Hwy',
     city: 'Sebastopol',
     state: 'CA',
     zip: '95472'
@@ -150,7 +150,7 @@ var address = {
   '1600 Pennsylvania Avenue Washington DC': {
     number: '1600',
     street: 'Pennsylvania',
-    type: 'Avenue',
+    type: 'Ave',
     city: 'Washington',
     state: 'DC'
   },
@@ -193,7 +193,7 @@ var address = {
   },
   '100 S.E. Washington Ave, Minneapolis, MN': {
     number: '100',
-    prefix: 'SE.',
+    prefix: 'SE',
     street: 'Washington',
     type: 'Ave',
     city: 'Minneapolis',
@@ -202,7 +202,7 @@ var address = {
   '3813 1/2 Some Road, Los Angeles, CA': {
     number: '3813',
     street: 'Some',
-    type: 'Road',
+    type: 'Rd',
     city: 'Los Angeles',
     state: 'CA'
   },
@@ -257,16 +257,16 @@ var address = {
   'Mission & Valencia Streets San Francisco CA': {
     street1: 'Mission',
     street2: 'Valencia',
-    type2: 'Street',
+    type2: 'St',
     city: 'San Francisco',
     state: 'CA',
-    type1: 'Street'
+    type1: 'St'
   },
   'Mission Avenue and Valencia Street San Francisco CA': {
     street1: 'Mission',
-    type1: 'Avenue',
+    type1: 'Ave',
     street2: 'Valencia',
-    type2: 'Street',
+    type2: 'St',
     city: 'San Francisco',
     state: 'CA'
   },
@@ -281,7 +281,7 @@ var address = {
     number: '123',
     street: 'Maple',
     city: 'Rochester',
-    state: 'New York'
+    state: 'NY'
   },
   '233 S Wacker Dr 60606-6306': {
     number: '233',
@@ -299,21 +299,21 @@ var address = {
     zip: '60606',
     plus4: '6306'
   },
-   "233 S Wacker Dr 60606 6306": {
-     number: "233",
-     prefix: "S",
-     street: "Wacker",
-     type: "Dr",
-     zip: "60606",
-     plus4: "6306"
-   },
-   "S Wacker Dr 60606 6306": {
-     prefix: "S",
-     street: "Wacker",
-     type: "Dr",
-     zip: "60606",
-     plus4: "6306"
-   },
+  '233 S Wacker Dr 60606 6306': {
+    number: '233',
+    prefix: 'S',
+    street: 'Wacker',
+    type: 'Dr',
+    zip: '60606',
+    plus4: '6306'
+  },
+  'S Wacker Dr 60606 6306': {
+    prefix: 'S',
+    street: 'Wacker',
+    type: 'Dr',
+    zip: '60606',
+    plus4: '6306'
+  },
   '233 S Wacker Dr lobby 60606': {
     number: '233',
     prefix: 'S',
@@ -344,7 +344,7 @@ var address = {
     sec_unit_num: '42',
     number: '99',
     street: 'Some',
-    type: 'Road',
+    type: 'Rd',
     city: 'Some City',
     state: 'LA'
   },
@@ -385,7 +385,7 @@ var address = {
   }
 };
 
-Object.keys(address).forEach(function(k) {
+Object.keys(address).forEach(function (k) {
   var parsed = parser.parseLocation(k);
   assert.deepEqual(address[k], parsed);
 });
