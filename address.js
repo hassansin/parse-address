@@ -533,7 +533,7 @@
            (?<type_0>'+Addr_Match.type+')\\b                    \n\
         )                                                       \n\
         |                                                       \n\
-        (?:(?<prefix_0>'+Addr_Match.direct+')\\W+)?               \n\
+        (?:(?<prefix_0>'+Addr_Match.direct+')\\W+)?             \n\
         (?:                                                     \n\
           (?<street_1>[^,]*\\d)                                 \n\
           (?:[^\\w,]*(?<suffix_1>'+Addr_Match.direct+')\\b)     \n\
@@ -548,9 +548,11 @@
         )                                                       \n\
       )';
 
+    Addr_Match.po_box = 'p\\W*(?:[om]|ost\\ ?office)\\W*b(?:ox)?'
+
     Addr_Match.sec_unit_type_numbered = '             \n\
       (?<sec_unit_type_1>su?i?te                      \n\
-        |p\\W*[om]\\W*b(?:ox)?                        \n\
+        |'+Addr_Match.po_box+'                        \n\
         |(?:ap|dep)(?:ar)?t(?:me?nt)?                 \n\
         |ro*m                                         \n\
         |flo*r?                                       \n\
@@ -627,6 +629,13 @@
       (?:'+Addr_Match.place+')?                               \n\
       ','ix');
 
+    Addr_Match.po_address = XRegExp('                         \n\
+      ^                                                       \n\
+      \\s*                                                    \n\
+      (?:'+Addr_Match.sec_unit.replace(/_\d/g,'$&1')+sep+')?  \n\
+      (?:'+Addr_Match.place+')?                               \n\
+      ','ix');
+
     Addr_Match.intersection = XRegExp('                     \n\
       ^\\W*                                                 \n\
       '+Addr_Match.street.replace(/_\d/g,'1$&')+'\\W*?      \n\
@@ -677,11 +686,19 @@
     lazyInit();
     var parts = XRegExp.exec(address,Addr_Match.informal_address);
     return parser.normalize_address(parts);
+  }; 
+  parser.parsePoAddress = function(address){
+    lazyInit();
+    var parts = XRegExp.exec(address,Addr_Match.po_address);
+    return parser.normalize_address(parts);
   };
   parser.parseLocation = function(address){
     lazyInit();
     if (XRegExp(Addr_Match.corner,'xi').test(address)) {
         return parser.parseIntersection(address);
+    }
+    if (XRegExp('^'+Addr_Match.po_box,'xi').test(address)){
+      return parser.parsePoAddress(address);
     }
     return parser.parseAddress(address)
         || parser.parseInformalAddress(address);
