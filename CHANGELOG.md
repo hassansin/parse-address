@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2018-09-27
+
+### Changed
+- Added support for PO BOX (https://github.com/hassansin/parse-address/pull/20)
+
 ## [1.0.0] - 2018-07-15
 
 ### Changed
