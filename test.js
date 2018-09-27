@@ -382,6 +382,27 @@ var address = {
     city: 'Troy',
     state: 'MI',
     zip: '48084'
+  },
+  'Post office Box 3094 Collierville TN 38027': {
+    sec_unit_type: 'Post office Box',
+    sec_unit_num: '3094',
+    city: 'Collierville',
+    state: 'TN',
+    zip: '38027'
+  },
+  'P.O. box 3094 Collierville TN 38027': {
+    sec_unit_type: 'PO box',
+    sec_unit_num: '3094',
+    city: 'Collierville',
+    state: 'TN',
+    zip: '38027'
+  },
+  'POBox 3094 Collierville TN 38027': {
+    sec_unit_type: 'POBox',
+    sec_unit_num: '3094',
+    city: 'Collierville',
+    state: 'TN',
+    zip: '38027'
   }
 };
 
