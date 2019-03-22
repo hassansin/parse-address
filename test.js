@@ -403,6 +403,30 @@ var address = {
     city: 'Collierville',
     state: 'TN',
     zip: '38027'
+  },
+  'N95W18855 Jay Dr, Menomonee Falls, WI 53051': {
+    number: 'N95W18855',
+    street: 'Jay',
+    type: 'Dr',
+    city: 'Menomonee Falls',
+    state: 'WI',
+    zip: '53051'
+  },
+  'N95W18855 Jay Dr Menomonee Falls WI 53051': {
+    number: 'N95W18855',
+    street: 'Jay',
+    type: 'Dr',
+    city: 'Menomonee Falls',
+    state: 'WI',
+    zip: '53051'
+  },
+  'n95w18855 Jay Dr Menomonee Falls WI 53051': {
+    number: 'n95w18855',
+    street: 'Jay',
+    type: 'Dr',
+    city: 'Menomonee Falls',
+    state: 'WI',
+    zip: '53051'
   }
 };
 

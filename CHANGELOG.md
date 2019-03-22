@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.1.1] - 2019-03-12
+
+### Changed
+- Added support for grid type street numbers.
+
 ## [1.1.0] - 2018-09-27
 
 ### Changed
