@@ -427,6 +427,150 @@ var address = {
     city: 'Menomonee Falls',
     state: 'WI',
     zip: '53051'
+  },
+  '10144 Potters Hatch Cmn Cupertino CA 95014': {
+    number: '10144',
+    street: 'Potters Hatch',
+    type: 'Cmn',
+    city: 'Cupertino',
+    state: 'CA',
+    zip: '95014'
+  },
+  '10144 Potters Hatch Common Cupertino CA 95014': {
+    number: '10144',
+    street: 'Potters Hatch',
+    type: 'Cmn',
+    city: 'Cupertino',
+    state: 'CA',
+    zip: '95014'
+  },
+  '36 Hathway Commons Lebanon OH 45036': {
+    number: '36',
+    street: 'Hathway',
+    type: 'Cmns',
+    city: 'Lebanon',
+    state: 'OH',
+    zip: '45036'
+  },
+  '36 Hathway Cmns Lebanon OH 45036': {
+    number: '36',
+    street: 'Hathway',
+    type: 'Cmns',
+    city: 'Lebanon',
+    state: 'OH',
+    zip: '45036'
+  },
+  '174 Sunset Crossroad Deer Isle ME 04627': {
+    number: '174',
+    street: 'Sunset',
+    type: 'Xrd',
+    city: 'Deer Isle',
+    state: 'ME',
+    zip: '04627'
+  },
+  '174 Sunset Xrd Deer Isle ME 04627': {
+    number: '174',
+    street: 'Sunset',
+    type: 'Xrd',
+    city: 'Deer Isle',
+    state: 'ME',
+    zip: '04627'
+  },
+  '905 Laing Crossroads Dawson GA 39842': {
+    number: '905',
+    street: 'Laing',
+    type: 'Xrds',
+    city: 'Dawson',
+    state: 'GA',
+    zip: '39842'
+  },
+  '905 Laing Xrds Dawson GA 39842': {
+    number: '905',
+    street: 'Laing',
+    type: 'Xrds',
+    city: 'Dawson',
+    state: 'GA',
+    zip: '39842'
+  },
+  '9402 Sequoia Fall San Antonio TX 78251': {
+    number: '9402',
+    street: 'Sequoia',
+    type: 'Fall',
+    city: 'San Antonio',
+    state: 'TX',
+    zip: '78251'
+  },
+  '24411 Alamosa Fls San Antonio TX 78255': {
+    number: '24411',
+    street: 'Alamosa',
+    type: 'Fls',
+    city: 'San Antonio',
+    state: 'TX',
+    zip: '78255'
+  },
+  '24411 Alamosa Falls San Antonio TX 78255': {
+    number: '24411',
+    street: 'Alamosa',
+    type: 'Fls',
+    city: 'San Antonio',
+    state: 'TX',
+    zip: '78255'
+  },
+  '15235 Spring Land San Antonio TX 78247': {
+    number: '15235',
+    street: 'Spring',
+    type: 'Land',
+    city: 'San Antonio',
+    state: 'TX',
+    zip: '78247'
+  },
+  '2146 University Square Mall Tampa FL 33612': {
+    number: '2146',
+    street: 'University Square',
+    type: 'Mall',
+    city: 'Tampa',
+    state: 'FL',
+    zip: '33612'
+  },
+  '415 Van Wyck Mews Norfolk VA 23517': {
+    number: '415',
+    street: 'Van Wyck',
+    type: 'Mews',
+    city: 'Norfolk',
+    state: 'VA',
+    zip: '23517'
+  },
+  '22 Cumbres Pass Santa Fe New Mexico 87508': {
+    number: '22',
+    street: 'Cumbres',
+    type: 'Pass',
+    city: 'Santa Fe',
+    state: 'NM',
+    zip: '87508'
+  },
+  '6 Maison Rue Hattiesburg MS 39402': {
+    number: '6',
+    street: 'Maison',
+    type: 'Rue',
+    city: 'Hattiesburg',
+    state: 'MS',
+    zip: '39402'
+  },
+  '12921 Coyote Run Fishers IN 46038': {
+    number: '12921',
+    street: 'Coyote',
+    type: 'Run',
+    city: 'Fishers',
+    state: 'IN',
+    zip: '46038'
+  },
+  '2974 London Wall Bloomfield Hills MI 48304': {
+    number: '2974',
+    street: 'London',
+    type: 'Wall',
+    city: 'Bloomfield Hills',
+    state: 'MI',
+    zip: '48304'
   }
 };
 

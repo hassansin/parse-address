@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [1.1.2] - 2019-04-15
+
+### Changed
+- Added support for some un-common street suffixes that were missed.
+
 ## [1.1.1] - 2019-03-12
 
 ### Changed
