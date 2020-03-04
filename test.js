@@ -230,6 +230,12 @@ var address = {
     city: 'San Francisco',
     state: 'CA'
   },
+  'Mission St and Valencia St': {
+    street1: 'Mission',
+    type1: 'St',
+    street2: 'Valencia',
+    type2: 'St'
+  },
   'Mission St & Valencia St San Francisco CA': {
     street1: 'Mission',
     type1: 'St',
@@ -253,6 +259,12 @@ var address = {
     city: 'San Francisco',
     state: 'CA',
     type1: 'St'
+  },
+  'Mission and Valencia Sts.': {
+    street1: 'Mission',
+    type1: 'St',
+    street2: 'Valencia',
+    type2: 'St'
   },
   'Mission & Valencia Streets San Francisco CA': {
     street1: 'Mission',
