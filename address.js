@@ -651,7 +651,7 @@
       ^\\W*                                                 \n\
       '+Addr_Match.street.replace(/_\d/g,'1$&')+'\\W*?      \n\
       \\s+'+Addr_Match.corner+'\\s+                         \n\
-      '+Addr_Match.street.replace(/_\d/g,'2$&') + '\\W+     \n\
+      '+Addr_Match.street.replace(/_\d/g,'2$&') + '($|\\W+) \n\
       '+Addr_Match.place+'\\W*$','ix');
   }
   parser.normalize_address = function(parts){
