@@ -2,10 +2,9 @@
   "name": "@bankrate/parse-address",
   "version": "1.0.0",
   "description": "US Street Address Parser",
-  "main": "address.js",
   "scripts": {
-    "test": "node test",
-    "build": "./node_modules/browserify/bin/cmd.js address.js --standalone parseAddress | ./node_modules/.bin/uglifyjs  > parse-address.min.js"
+    "test": "npx jest",
+    "build": "./node_modules/browserify/bin/cmd.js dist/address.js --standalone parseAddress | ./node_modules/.bin/uglifyjs  > parse-address.min.js"
   },
   "repository": {
     "type": "git",
@@ -14,5 +13,16 @@
   "license": "ISC",
   "dependencies": {
     "xregexp": "^3.1.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.24",
+    "@types/node": "^16.3.2",
+    "@types/xregexp": "^4.4.0",
+    "browserify": "^17.0.0",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.3",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5",
+    "uglifyjs": "^2.4.11"
   }
 }
