@@ -1,6 +1,6 @@
 # US Street Address Parser  [![Build Status](https://travis-ci.org/hassansin/parse-address.svg)](https://travis-ci.org/hassansin/parse-address)
 
-This is Node.js port for Perl [Geo::StreetAddress::US](http://search.cpan.org/~timb/Geo-StreetAddress-US-1.04/US.pm) package
+This is a Typescript port for the Perl [Geo::StreetAddress::US](http://search.cpan.org/~timb/Geo-StreetAddress-US-1.04/US.pm) package
 
 *Description from Geo::StreetAddress::US*:
 
@@ -8,17 +8,13 @@ This is Node.js port for Perl [Geo::StreetAddress::US](http://search.cpan.org/~t
 
 ## Usage:
 
-```javascript
-//from node:
-npm install parse-address
-var parser = require('parse-address'); 
-var parsed = parser.parseLocation('1005 N Gravenstein Highway Sebastopol CA 95472');
+```ts
+import parser from '@bankrate/parse-address'
 
-//from browser:
-<script type="text/javascript" src="./parse-address.min.js"></script>
-var parsed = parseAddress.parseLocation('1005 N Gravenstein Highway Sebastopol CA 95472');
+const address = '1005 N Gravenstein Highway Sebastopol CA 95472'
+const parsed = parser.parseLocation(address)
 
-//Parsed address:
+// Parsed address:
 {
  number: '1005',
  prefix: 'N',
@@ -26,5 +22,6 @@ var parsed = parseAddress.parseLocation('1005 N Gravenstein Highway Sebastopol C
  type: 'Hwy',
  city: 'Sebastopol',
  state: 'CA',
- zip: '95472' }
+ zip: '95472',
+}
 ```
