@@ -1,7 +1,7 @@
-var parser = require('./address');
-var assert = require('assert');
+import assert from 'assert'
+import parser from '../address'
 
-var address = {
+const address = {
   '1005 Gravenstein Hwy 95472': {
     number: '1005',
     street: 'Gravenstein',
@@ -584,9 +584,13 @@ var address = {
     state: 'MI',
     zip: '48304'
   }
-};
+}
 
-Object.keys(address).forEach(function (k) {
-  var parsed = parser.parseLocation(k);
-  assert.deepEqual(address[k], parsed);
-});
+describe('Parser', () => {
+  it('Properly parses addresses', () => {
+    Object.keys(address).forEach(function (k) {
+      const parsed = parser.parseLocation(k)
+      assert.deepEqual(address[k], parsed)
+    })
+  })
+})
