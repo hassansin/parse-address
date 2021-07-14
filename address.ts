@@ -657,11 +657,15 @@ parser.normalize_address = function (parts) {
   const parsed: Record<string, any> = {}
 
   Object.keys(parts).forEach(function (k) {
+    // @ts-ignore
     if (['input', 'index'].indexOf(k) !== -1 || isFinite(k)) {
       return
     }
 
-    const key = isFinite(k.split('_').pop()) ? k.split('_').slice(0, -1).join('_') : k
+    // @ts-ignore
+    const key = isFinite(k.split('_').pop())
+      ? k.split('_').slice(0, -1).join('_')
+      : k
 
     if (parts[k])
       parsed[key] = parts[k].trim().replace(/^\s+|\s+$|[^\w\s\-#&]/g, '')
