@@ -1,6 +1,6 @@
 {
-  "name": "parse-address",
-  "version": "1.1.2",
+  "name": "@bankrate/parse-address",
+  "version": "1.0.0",
   "description": "US Street Address Parser",
   "main": "address.js",
   "scripts": {
@@ -9,24 +9,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hassansin/parse-address.git"
+    "url": "git://github.com/bankrate/parse-address.git"
   },
-  "keywords": [
-    "extract",
-    "address",
-    "parser",
-    "address",
-    "street",
-    "US",
-    "Geo::StreetAddress::US",
-    "geo"
-  ],
-  "author": "hassansin <rezatxe@gmail.com> (https://github.com/hassansin)",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/hassansin/parse-address/issues"
-  },
-  "homepage": "https://github.com/hassansin/parse-address",
   "dependencies": {
     "xregexp": "^3.1.1"
   }
