@@ -4,7 +4,7 @@
   "description": "US Street Address Parser",
   "scripts": {
     "test": "npx jest",
-    "build": "./node_modules/browserify/bin/cmd.js dist/address.js --standalone parseAddress | ./node_modules/.bin/uglifyjs  > parse-address.min.js"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
