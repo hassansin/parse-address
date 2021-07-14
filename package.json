@@ -12,7 +12,7 @@
   },
   "license": "ISC",
   "dependencies": {
-    "xregexp": "^3.1.1"
+    "xregexp": "^5.0.2"
   },
   "devDependencies": {
     "@types/jest": "^26.0.24",

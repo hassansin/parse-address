@@ -1,4 +1,3 @@
-// @ts-ignore
 import XRegExp from 'xregexp'
 
 const parser: Record<string, any> = {}
@@ -667,8 +666,9 @@ parser.normalize_address = function (parts) {
       ? k.split('_').slice(0, -1).join('_')
       : k
 
-    if (parts[k])
+    if (parts[k]) {
       parsed[key] = parts[k].trim().replace(/^\s+|\s+$|[^\w\s\-#&]/g, '')
+    }
   })
 
   each(Normalize_Map, function (map, key) {
