@@ -1,472 +1,28 @@
 import XRegExp from 'xregexp'
 
-const parser: Record<string, any> = {}
-let Addr_Match: Record<string, any> = {}
+import {
+  stateCodesMap,
+  directionsMap,
+  streetTypeMap,
+} from './maps'
 
-const Directional = {
-  north: 'N',
-  northeast: 'NE',
-  east: 'E',
-  southeast: 'SE',
-  south: 'S',
-  southwest: 'SW',
-  west: 'W',
-  northwest: 'NW',
-}
-
-const Street_Type = {
-  allee: 'aly',
-  alley: 'aly',
-  ally: 'aly',
-  anex: 'anx',
-  annex: 'anx',
-  annx: 'anx',
-  arcade: 'arc',
-  av: 'ave',
-  aven: 'ave',
-  avenu: 'ave',
-  avenue: 'ave',
-  avn: 'ave',
-  avnue: 'ave',
-  bayoo: 'byu',
-  bayou: 'byu',
-  beach: 'bch',
-  bend: 'bnd',
-  bluf: 'blf',
-  bluff: 'blf',
-  bluffs: 'blfs',
-  bot: 'btm',
-  bottm: 'btm',
-  bottom: 'btm',
-  boul: 'blvd',
-  boulevard: 'blvd',
-  boulv: 'blvd',
-  branch: 'br',
-  brdge: 'brg',
-  bridge: 'brg',
-  brnch: 'br',
-  brook: 'brk',
-  brooks: 'brks',
-  burg: 'bg',
-  burgs: 'bgs',
-  bypa: 'byp',
-  bypas: 'byp',
-  bypass: 'byp',
-  byps: 'byp',
-  camp: 'cp',
-  canyn: 'cyn',
-  canyon: 'cyn',
-  cape: 'cpe',
-  causeway: 'cswy',
-  causway: 'cswy',
-  causwa: 'cswy',
-  cen: 'ctr',
-  cent: 'ctr',
-  center: 'ctr',
-  centers: 'ctrs',
-  centr: 'ctr',
-  centre: 'ctr',
-  circ: 'cir',
-  circl: 'cir',
-  circle: 'cir',
-  circles: 'cirs',
-  ck: 'crk',
-  cliff: 'clf',
-  cliffs: 'clfs',
-  club: 'clb',
-  cmp: 'cp',
-  cnter: 'ctr',
-  cntr: 'ctr',
-  cnyn: 'cyn',
-  common: 'cmn',
-  commons: 'cmns',
-  corner: 'cor',
-  corners: 'cors',
-  course: 'crse',
-  court: 'ct',
-  courts: 'cts',
-  cove: 'cv',
-  coves: 'cvs',
-  cr: 'crk',
-  crcl: 'cir',
-  crcle: 'cir',
-  crecent: 'cres',
-  creek: 'crk',
-  crescent: 'cres',
-  cresent: 'cres',
-  crest: 'crst',
-  crossing: 'xing',
-  crossroad: 'xrd',
-  crossroads: 'xrds',
-  crscnt: 'cres',
-  crsent: 'cres',
-  crsnt: 'cres',
-  crssing: 'xing',
-  crssng: 'xing',
-  crt: 'ct',
-  curve: 'curv',
-  dale: 'dl',
-  dam: 'dm',
-  div: 'dv',
-  divide: 'dv',
-  driv: 'dr',
-  drive: 'dr',
-  drives: 'drs',
-  drv: 'dr',
-  dvd: 'dv',
-  estate: 'est',
-  estates: 'ests',
-  exp: 'expy',
-  expr: 'expy',
-  express: 'expy',
-  expressway: 'expy',
-  expw: 'expy',
-  extension: 'ext',
-  extensions: 'exts',
-  extn: 'ext',
-  extnsn: 'ext',
-  fall: 'fall',
-  falls: 'fls',
-  ferry: 'fry',
-  field: 'fld',
-  fields: 'flds',
-  flat: 'flt',
-  flats: 'flts',
-  ford: 'frd',
-  fords: 'frds',
-  forest: 'frst',
-  forests: 'frst',
-  forg: 'frg',
-  forge: 'frg',
-  forges: 'frgs',
-  fork: 'frk',
-  forks: 'frks',
-  fort: 'ft',
-  freeway: 'fwy',
-  freewy: 'fwy',
-  frry: 'fry',
-  frt: 'ft',
-  frway: 'fwy',
-  frwy: 'fwy',
-  garden: 'gdn',
-  gardens: 'gdns',
-  gardn: 'gdn',
-  gateway: 'gtwy',
-  gatewy: 'gtwy',
-  gatway: 'gtwy',
-  glen: 'gln',
-  glens: 'glns',
-  grden: 'gdn',
-  grdn: 'gdn',
-  grdns: 'gdns',
-  green: 'grn',
-  greens: 'grns',
-  grov: 'grv',
-  grove: 'grv',
-  groves: 'grvs',
-  gtway: 'gtwy',
-  harb: 'hbr',
-  harbor: 'hbr',
-  harbors: 'hbrs',
-  harbr: 'hbr',
-  haven: 'hvn',
-  havn: 'hvn',
-  height: 'hts',
-  heights: 'hts',
-  hgts: 'hts',
-  highway: 'hwy',
-  highwy: 'hwy',
-  hill: 'hl',
-  hills: 'hls',
-  hiway: 'hwy',
-  hiwy: 'hwy',
-  hllw: 'holw',
-  hollow: 'holw',
-  hollows: 'holw',
-  holws: 'holw',
-  hrbor: 'hbr',
-  ht: 'hts',
-  hway: 'hwy',
-  inlet: 'inlt',
-  island: 'is',
-  islands: 'iss',
-  isles: 'isle',
-  islnd: 'is',
-  islnds: 'iss',
-  jction: 'jct',
-  jctn: 'jct',
-  jctns: 'jcts',
-  junction: 'jct',
-  junctions: 'jcts',
-  junctn: 'jct',
-  juncton: 'jct',
-  key: 'ky',
-  keys: 'kys',
-  knol: 'knl',
-  knoll: 'knl',
-  knolls: 'knls',
-  la: 'ln',
-  lake: 'lk',
-  lakes: 'lks',
-  land: 'land',
-  landing: 'lndg',
-  lane: 'ln',
-  lanes: 'ln',
-  ldge: 'ldg',
-  light: 'lgt',
-  lights: 'lgts',
-  lndng: 'lndg',
-  loaf: 'lf',
-  lock: 'lck',
-  locks: 'lcks',
-  lodg: 'ldg',
-  lodge: 'ldg',
-  loops: 'loop',
-  mall: 'mall',
-  manor: 'mnr',
-  manors: 'mnrs',
-  meadow: 'mdw',
-  meadows: 'mdws',
-  medows: 'mdws',
-  mews: 'mews',
-  mill: 'ml',
-  mills: 'mls',
-  mission: 'msn',
-  missn: 'msn',
-  mnt: 'mt',
-  mntain: 'mtn',
-  mntn: 'mtn',
-  mntns: 'mtns',
-  motorway: 'mtwy',
-  mount: 'mt',
-  mountain: 'mtn',
-  mountains: 'mtns',
-  mountin: 'mtn',
-  mssn: 'msn',
-  mtin: 'mtn',
-  neck: 'nck',
-  orchard: 'orch',
-  orchrd: 'orch',
-  overpass: 'opas',
-  ovl: 'oval',
-  parks: 'park',
-  parkway: 'pkwy',
-  parkways: 'pkwy',
-  parkwy: 'pkwy',
-  pass: 'pass',
-  passage: 'psge',
-  paths: 'path',
-  pikes: 'pike',
-  pine: 'pne',
-  pines: 'pnes',
-  pk: 'park',
-  pkway: 'pkwy',
-  pkwys: 'pkwy',
-  pky: 'pkwy',
-  place: 'pl',
-  plain: 'pln',
-  plaines: 'plns',
-  plains: 'plns',
-  plaza: 'plz',
-  plza: 'plz',
-  point: 'pt',
-  points: 'pts',
-  port: 'prt',
-  ports: 'prts',
-  prairie: 'pr',
-  prarie: 'pr',
-  prk: 'park',
-  prr: 'pr',
-  rad: 'radl',
-  radial: 'radl',
-  radiel: 'radl',
-  ranch: 'rnch',
-  ranches: 'rnch',
-  rapid: 'rpd',
-  rapids: 'rpds',
-  rdge: 'rdg',
-  rest: 'rst',
-  ridge: 'rdg',
-  ridges: 'rdgs',
-  river: 'riv',
-  rivr: 'riv',
-  rnchs: 'rnch',
-  road: 'rd',
-  roads: 'rds',
-  route: 'rte',
-  rvr: 'riv',
-  row: 'row',
-  rue: 'rue',
-  run: 'run',
-  shoal: 'shl',
-  shoals: 'shls',
-  shoar: 'shr',
-  shoars: 'shrs',
-  shore: 'shr',
-  shores: 'shrs',
-  skyway: 'skwy',
-  spng: 'spg',
-  spngs: 'spgs',
-  spring: 'spg',
-  springs: 'spgs',
-  sprng: 'spg',
-  sprngs: 'spgs',
-  spurs: 'spur',
-  sqr: 'sq',
-  sqre: 'sq',
-  sqrs: 'sqs',
-  squ: 'sq',
-  square: 'sq',
-  squares: 'sqs',
-  station: 'sta',
-  statn: 'sta',
-  stn: 'sta',
-  str: 'st',
-  strav: 'stra',
-  strave: 'stra',
-  straven: 'stra',
-  stravenue: 'stra',
-  stravn: 'stra',
-  stream: 'strm',
-  street: 'st',
-  streets: 'sts',
-  streme: 'strm',
-  strt: 'st',
-  strvn: 'stra',
-  strvnue: 'stra',
-  sumit: 'smt',
-  sumitt: 'smt',
-  summit: 'smt',
-  terr: 'ter',
-  terrace: 'ter',
-  throughway: 'trwy',
-  tpk: 'tpke',
-  tr: 'trl',
-  trace: 'trce',
-  traces: 'trce',
-  track: 'trak',
-  tracks: 'trak',
-  trafficway: 'trfy',
-  trail: 'trl',
-  trails: 'trl',
-  trk: 'trak',
-  trks: 'trak',
-  trls: 'trl',
-  trnpk: 'tpke',
-  trpk: 'tpke',
-  tunel: 'tunl',
-  tunls: 'tunl',
-  tunnel: 'tunl',
-  tunnels: 'tunl',
-  tunnl: 'tunl',
-  turnpike: 'tpke',
-  turnpk: 'tpke',
-  underpass: 'upas',
-  union: 'un',
-  unions: 'uns',
-  valley: 'vly',
-  valleys: 'vlys',
-  vally: 'vly',
-  vdct: 'via',
-  viadct: 'via',
-  viaduct: 'via',
-  view: 'vw',
-  views: 'vws',
-  vill: 'vlg',
-  villag: 'vlg',
-  village: 'vlg',
-  villages: 'vlgs',
-  ville: 'vl',
-  villg: 'vlg',
-  villiage: 'vlg',
-  vist: 'vis',
-  vista: 'vis',
-  vlly: 'vly',
-  vst: 'vis',
-  vsta: 'vis',
-  wall: 'wall',
-  walks: 'walk',
-  well: 'wl',
-  wells: 'wls',
-  wy: 'way',
-}
-
-const State_Code = {
-  'alabama': 'AL',
-  'alaska': 'AK',
-  'american samoa': 'AS',
-  'arizona': 'AZ',
-  'arkansas': 'AR',
-  'california': 'CA',
-  'colorado': 'CO',
-  'connecticut': 'CT',
-  'delaware': 'DE',
-  'district of columbia': 'DC',
-  'federated states of micronesia': 'FM',
-  'florida': 'FL',
-  'georgia': 'GA',
-  'guam': 'GU',
-  'hawaii': 'HI',
-  'idaho': 'ID',
-  'illinois': 'IL',
-  'indiana': 'IN',
-  'iowa': 'IA',
-  'kansas': 'KS',
-  'kentucky': 'KY',
-  'louisiana': 'LA',
-  'maine': 'ME',
-  'marshall islands': 'MH',
-  'maryland': 'MD',
-  'massachusetts': 'MA',
-  'michigan': 'MI',
-  'minnesota': 'MN',
-  'mississippi': 'MS',
-  'missouri': 'MO',
-  'montana': 'MT',
-  'nebraska': 'NE',
-  'nevada': 'NV',
-  'new hampshire': 'NH',
-  'new jersey': 'NJ',
-  'new mexico': 'NM',
-  'new york': 'NY',
-  'north carolina': 'NC',
-  'north dakota': 'ND',
-  'northern mariana islands': 'MP',
-  'ohio': 'OH',
-  'oklahoma': 'OK',
-  'oregon': 'OR',
-  'palau': 'PW',
-  'pennsylvania': 'PA',
-  'puerto rico': 'PR',
-  'rhode island': 'RI',
-  'south carolina': 'SC',
-  'south dakota': 'SD',
-  'tennessee': 'TN',
-  'texas': 'TX',
-  'utah': 'UT',
-  'vermont': 'VT',
-  'virgin islands': 'VI',
-  'virginia': 'VA',
-  'washington': 'WA',
-  'west virginia': 'WV',
-  'wisconsin': 'WI',
-  'wyoming': 'WY',
-}
-
-let Direction_Code
+let directionCode
 let initialized = false
+let addressMatch: Record<string, any> = {}
 
-const Normalize_Map = {
-  prefix: Directional,
-  prefix1: Directional,
-  prefix2: Directional,
-  suffix: Directional,
-  suffix1: Directional,
-  suffix2: Directional,
-  type: Street_Type,
-  type1: Street_Type,
-  type2: Street_Type,
-  state: State_Code,
+const parser: Record<string, any> = {}
+
+const normalizeMap = {
+  prefix: directionsMap,
+  prefix1: directionsMap,
+  prefix2: directionsMap,
+  suffix: directionsMap,
+  suffix1: directionsMap,
+  suffix2: directionsMap,
+  type: streetTypeMap,
+  type1: streetTypeMap,
+  type2: streetTypeMap,
+  state: stateCodesMap,
 }
 
 function capitalize(s) {
@@ -511,7 +67,7 @@ function lazyInit() {
   }
   initialized = true
 
-  Direction_Code = invert(Directional)
+  directionCode = invert(directionsMap)
 
   /*
   var Street_Type_Match = {}
@@ -520,44 +76,44 @@ function lazyInit() {
   each(Street_Type_Match,function(v,k){ Street_Type_Match[k] = new RegExp( '\\b(?:' +  Street_Type_Match[k]  + ')\\b', 'i') })
   */
 
-  Addr_Match = {
-    type: flatten(Street_Type).sort().filter(function (v, i, arr) { return arr.indexOf(v) === i }).join('|'),
+  addressMatch = {
+    type: flatten(streetTypeMap).sort().filter(function (v, i, arr) { return arr.indexOf(v) === i }).join('|'),
     fraction: '\\d+\\/\\d+',
-    state: '\\b(?:' + keys(State_Code).concat(values(State_Code)).map(XRegExp.escape).join('|') + ')\\b',
-    direct: values(Directional).sort((a, b) => Number(a.length < b.length)).reduce(function (prev, curr) { return prev.concat([XRegExp.escape(curr.replace(/\w/g, '$&.')), curr]) }, keys(Directional)).join('|'),
-    dircode: keys(Direction_Code).join('|'),
+    state: '\\b(?:' + keys(stateCodesMap).concat(values(stateCodesMap)).map(XRegExp.escape).join('|') + ')\\b',
+    direct: values(directionsMap).sort((a, b) => Number(a.length < b.length)).reduce(function (prev, curr) { return prev.concat([XRegExp.escape(curr.replace(/\w/g, '$&.')), curr]) }, keys(directionsMap)).join('|'),
+    dircode: keys(directionCode).join('|'),
     zip: '(?<zip>\\d{5})[- ]?(?<plus4>\\d{4})?',
     corner: '(?:\\band\\b|\\bat\\b|&|\\@)',
   }
 
-  Addr_Match.number = '(?<number>(\\d+-?\\d*)|([N|S|E|W]\\d{1,3}[N|S|E|W]\\d{1,6}))(?=\\D)'
+  addressMatch.number = '(?<number>(\\d+-?\\d*)|([N|S|E|W]\\d{1,3}[N|S|E|W]\\d{1,6}))(?=\\D)'
 
-  Addr_Match.street = '                                       \n\
+  addressMatch.street = '                                       \n\
     (?:                                                       \n\
-      (?:(?<street_0>'+ Addr_Match.direct + ')\\W+               \n\
-          (?<type_0>'+ Addr_Match.type + ')\\b                    \n\
+      (?:(?<street_0>'+ addressMatch.direct + ')\\W+               \n\
+          (?<type_0>'+ addressMatch.type + ')\\b                    \n\
       )                                                       \n\
       |                                                       \n\
-      (?:(?<prefix_0>'+ Addr_Match.direct + ')\\W+)?             \n\
+      (?:(?<prefix_0>'+ addressMatch.direct + ')\\W+)?             \n\
       (?:                                                     \n\
         (?<street_1>[^,]*\\d)                                 \n\
-        (?:[^\\w,]*(?<suffix_1>'+ Addr_Match.direct + ')\\b)     \n\
+        (?:[^\\w,]*(?<suffix_1>'+ addressMatch.direct + ')\\b)     \n\
         |                                                     \n\
         (?<street_2>[^,]+)                                    \n\
-        (?:[^\\w,]+(?<type_2>'+ Addr_Match.type + ')\\b)         \n\
-        (?:[^\\w,]+(?<suffix_2>'+ Addr_Match.direct + ')\\b)?    \n\
+        (?:[^\\w,]+(?<type_2>'+ addressMatch.type + ')\\b)         \n\
+        (?:[^\\w,]+(?<suffix_2>'+ addressMatch.direct + ')\\b)?    \n\
         |                                                     \n\
         (?<street_3>[^,]+?)                                   \n\
-        (?:[^\\w,]+(?<type_3>'+ Addr_Match.type + ')\\b)?        \n\
-        (?:[^\\w,]+(?<suffix_3>'+ Addr_Match.direct + ')\\b)?    \n\
+        (?:[^\\w,]+(?<type_3>'+ addressMatch.type + ')\\b)?        \n\
+        (?:[^\\w,]+(?<suffix_3>'+ addressMatch.direct + ')\\b)?    \n\
       )                                                       \n\
     )'
 
-  Addr_Match.po_box = 'p\\W*(?:[om]|ost\\ ?office)\\W*b(?:ox)?'
+  addressMatch.po_box = 'p\\W*(?:[om]|ost\\ ?office)\\W*b(?:ox)?'
 
-  Addr_Match.sec_unit_type_numbered = '             \n\
+  addressMatch.sec_unit_type_numbered = '             \n\
     (?<sec_unit_type_1>su?i?te                      \n\
-      |'+ Addr_Match.po_box + '                        \n\
+      |'+ addressMatch.po_box + '                        \n\
       |(?:ap|dep)(?:ar)?t(?:me?nt)?                 \n\
       |ro*m                                         \n\
       |flo*r?                                       \n\
@@ -574,7 +130,7 @@ function lazyInit() {
     )                                               \n\
     '
 
-  Addr_Match.sec_unit_type_unnumbered = '           \n\
+  addressMatch.sec_unit_type_unnumbered = '           \n\
     (?<sec_unit_type_2>ba?se?me?n?t                 \n\
       |fro?nt                                       \n\
       |lo?bby                                       \n\
@@ -586,67 +142,67 @@ function lazyInit() {
       |uppe?r                                       \n\
     )\\b'
 
-  Addr_Match.sec_unit = '                               \n\
+  addressMatch.sec_unit = '                               \n\
     (?:                               #fix3             \n\
       (?:                             #fix1             \n\
         (?:                                             \n\
-          (?:'+ Addr_Match.sec_unit_type_numbered + '\\W*) \n\
+          (?:'+ addressMatch.sec_unit_type_numbered + '\\W*) \n\
           |(?<sec_unit_type_3>\\#)\\W*                  \n\
         )                                               \n\
         (?<sec_unit_num_1>[\\w-]+)                      \n\
       )                                                 \n\
       |                                                 \n\
-      '+ Addr_Match.sec_unit_type_unnumbered + '           \n\
+      '+ addressMatch.sec_unit_type_unnumbered + '           \n\
     )'
 
-  Addr_Match.city_and_state = '                       \n\
+  addressMatch.city_and_state = '                       \n\
     (?:                                               \n\
       (?<city>[^\\d,]+?)\\W+                          \n\
-      (?<state>'+ Addr_Match.state + ')                  \n\
+      (?<state>'+ addressMatch.state + ')                  \n\
     )                                                 \n\
     '
 
-  Addr_Match.place = '                                \n\
-    (?:'+ Addr_Match.city_and_state + '\\W*)?            \n\
-    (?:'+ Addr_Match.zip + ')?                           \n\
+  addressMatch.place = '                                \n\
+    (?:'+ addressMatch.city_and_state + '\\W*)?            \n\
+    (?:'+ addressMatch.zip + ')?                           \n\
     '
 
-  Addr_Match.address = XRegExp('                      \n\
+  addressMatch.address = XRegExp('                      \n\
     ^                                                 \n\
     [^\\w\\#]*                                        \n\
-    ('+ Addr_Match.number + ')\\W*                       \n\
-    (?:'+ Addr_Match.fraction + '\\W*)?                  \n\
-        '+ Addr_Match.street + '\\W+                      \n\
-    (?:'+ Addr_Match.sec_unit + ')?\\W*          #fix2   \n\
-        '+ Addr_Match.place + '                           \n\
+    ('+ addressMatch.number + ')\\W*                       \n\
+    (?:'+ addressMatch.fraction + '\\W*)?                  \n\
+        '+ addressMatch.street + '\\W+                      \n\
+    (?:'+ addressMatch.sec_unit + ')?\\W*          #fix2   \n\
+        '+ addressMatch.place + '                           \n\
     \\W*$', 'ix')
 
   var sep = '(?:\\W+|$)' // no support for \Z
 
-  Addr_Match.informal_address = XRegExp('                   \n\
+  addressMatch.informal_address = XRegExp('                   \n\
     ^                                                       \n\
     \\s*                                                    \n\
-    (?:'+ Addr_Match.sec_unit + sep + ')?                        \n\
-    (?:'+ Addr_Match.number + ')?\\W*                          \n\
-    (?:'+ Addr_Match.fraction + '\\W*)?                        \n\
-        '+ Addr_Match.street + sep + '                            \n\
-    (?:'+ Addr_Match.sec_unit.replace(/_\d/g, '$&1') + sep + ')?  \n\
-    (?:'+ Addr_Match.place + ')?                               \n\
+    (?:'+ addressMatch.sec_unit + sep + ')?                        \n\
+    (?:'+ addressMatch.number + ')?\\W*                          \n\
+    (?:'+ addressMatch.fraction + '\\W*)?                        \n\
+        '+ addressMatch.street + sep + '                            \n\
+    (?:'+ addressMatch.sec_unit.replace(/_\d/g, '$&1') + sep + ')?  \n\
+    (?:'+ addressMatch.place + ')?                               \n\
     ', 'ix')
 
-  Addr_Match.po_address = XRegExp('                         \n\
+  addressMatch.po_address = XRegExp('                         \n\
     ^                                                       \n\
     \\s*                                                    \n\
-    (?:'+ Addr_Match.sec_unit.replace(/_\d/g, '$&1') + sep + ')?  \n\
-    (?:'+ Addr_Match.place + ')?                               \n\
+    (?:'+ addressMatch.sec_unit.replace(/_\d/g, '$&1') + sep + ')?  \n\
+    (?:'+ addressMatch.place + ')?                               \n\
     ', 'ix')
 
-  Addr_Match.intersection = XRegExp('                     \n\
+  addressMatch.intersection = XRegExp('                     \n\
     ^\\W*                                                 \n\
-    '+ Addr_Match.street.replace(/_\d/g, '1$&') + '\\W*?      \n\
-    \\s+'+ Addr_Match.corner + '\\s+                         \n\
-    '+ Addr_Match.street.replace(/_\d/g, '2$&') + '($|\\W+) \n\
-    '+ Addr_Match.place + '\\W*$', 'ix')
+    '+ addressMatch.street.replace(/_\d/g, '1$&') + '\\W*?      \n\
+    \\s+'+ addressMatch.corner + '\\s+                         \n\
+    '+ addressMatch.street.replace(/_\d/g, '2$&') + '($|\\W+) \n\
+    '+ addressMatch.place + '\\W*$', 'ix')
 }
 
 parser.normalize_address = function (parts) {
@@ -671,7 +227,7 @@ parser.normalize_address = function (parts) {
     }
   })
 
-  each(Normalize_Map, function (map, key) {
+  each(normalizeMap, function (map, key) {
     if (parsed[key] && map[parsed[key].toLowerCase()]) {
       parsed[key] = map[parsed[key].toLowerCase()]
     }
@@ -684,9 +240,9 @@ parser.normalize_address = function (parts) {
 
   if (parsed.city) {
     parsed.city = XRegExp.replace(parsed.city,
-      XRegExp('^(?<dircode>' + Addr_Match.dircode + ')\\s+(?=\\S)', 'ix'),
+      XRegExp('^(?<dircode>' + addressMatch.dircode + ')\\s+(?=\\S)', 'ix'),
       function (match) {
-        return capitalize(Direction_Code[match.dircode.toUpperCase()]) + ' '
+        return capitalize(directionCode[match.dircode.toUpperCase()]) + ' '
       })
   }
 
@@ -695,28 +251,28 @@ parser.normalize_address = function (parts) {
 
 parser.parseAddress = function (address) {
   lazyInit()
-  const parts = XRegExp.exec(address, Addr_Match.address)
+  const parts = XRegExp.exec(address, addressMatch.address)
   return parser.normalize_address(parts)
 }
 
 parser.parseInformalAddress = function (address) {
   lazyInit()
-  const parts = XRegExp.exec(address, Addr_Match.informal_address)
+  const parts = XRegExp.exec(address, addressMatch.informal_address)
   return parser.normalize_address(parts)
 }
 
 parser.parsePoAddress = function (address) {
   lazyInit()
-  const parts = XRegExp.exec(address, Addr_Match.po_address)
+  const parts = XRegExp.exec(address, addressMatch.po_address)
   return parser.normalize_address(parts)
 }
 
 parser.parseLocation = function (address) {
   lazyInit()
-  if (XRegExp(Addr_Match.corner, 'xi').test(address)) {
+  if (XRegExp(addressMatch.corner, 'xi').test(address)) {
     return parser.parseIntersection(address)
   }
-  if (XRegExp('^' + Addr_Match.po_box, 'xi').test(address)) {
+  if (XRegExp('^' + addressMatch.po_box, 'xi').test(address)) {
     return parser.parsePoAddress(address)
   }
   return parser.parseAddress(address)
@@ -726,7 +282,7 @@ parser.parseLocation = function (address) {
 parser.parseIntersection = function (address) {
   lazyInit()
 
-  let parts = XRegExp.exec(address, Addr_Match.intersection)
+  let parts = XRegExp.exec(address, addressMatch.intersection)
   parts = parser.normalize_address(parts)
 
   if (parts) {
@@ -735,7 +291,7 @@ parser.parseIntersection = function (address) {
     if (parts.type2 && !parts.type1 || (parts.type1 === parts.type2)) {
       var type = parts.type2
       type = XRegExp.replace(type, /s\W*$/, '')
-      if (XRegExp('^' + Addr_Match.type + '$', 'ix').test(type)) {
+      if (XRegExp('^' + addressMatch.type + '$', 'ix').test(type)) {
         parts.type1 = parts.type2 = type
       }
     }
