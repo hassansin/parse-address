@@ -22,14 +22,14 @@ export class AddressParser {
 
   constructor() {
     this.directionCode = invert(directionsMap)
-  
+
     /*
-    var Street_Type_Match = {}
+    const Street_Type_Match = {}
     each(Street_Type,function(v,k){ Street_Type_Match[v] = XRegExp.escape(v) })
     each(Street_Type,function(v,k){ Street_Type_Match[v] = Street_Type_Match[v] + '|' + XRegExp.escape(k) })
     each(Street_Type_Match,function(v,k){ Street_Type_Match[k] = new RegExp( '\\b(?:' +  Street_Type_Match[k]  + ')\\b', 'i') })
     */
-  
+
     this.addressMatch = {
       type: flatten(streetTypeMap).sort().filter(function (v, i, arr) { return arr.indexOf(v) === i }).join('|'),
       fraction: '\\d+\\/\\d+',
@@ -39,9 +39,9 @@ export class AddressParser {
       zip: '(?<zip>\\d{5})[- ]?(?<plus4>\\d{4})?',
       corner: '(?:\\band\\b|\\bat\\b|&|\\@)',
     }
-  
+
     this.addressMatch.number = '(?<number>(\\d+-?\\d*)|([N|S|E|W]\\d{1,3}[N|S|E|W]\\d{1,6}))(?=\\D)'
-  
+
     this.addressMatch.street = '                                       \n\
       (?:                                                       \n\
         (?:(?<street_0>'+ this.addressMatch.direct + ')\\W+               \n\
@@ -62,9 +62,9 @@ export class AddressParser {
           (?:[^\\w,]+(?<suffix_3>'+ this.addressMatch.direct + ')\\b)?    \n\
         )                                                       \n\
       )'
-  
+
     this.addressMatch.po_box = 'p\\W*(?:[om]|ost\\ ?office)\\W*b(?:ox)?'
-  
+
     this.addressMatch.sec_unit_type_numbered = '             \n\
       (?<sec_unit_type_1>su?i?te                      \n\
         |'+ this.addressMatch.po_box + '                        \n\
@@ -83,7 +83,7 @@ export class AddressParser {
         |box)(?![a-z]                                 \n\
       )                                               \n\
       '
-  
+
     this.addressMatch.sec_unit_type_unnumbered = '           \n\
       (?<sec_unit_type_2>ba?se?me?n?t                 \n\
         |fro?nt                                       \n\
@@ -95,7 +95,7 @@ export class AddressParser {
         |side                                         \n\
         |uppe?r                                       \n\
       )\\b'
-  
+
     this.addressMatch.sec_unit = '                               \n\
       (?:                               #fix3             \n\
         (?:                             #fix1             \n\
@@ -108,19 +108,19 @@ export class AddressParser {
         |                                                 \n\
         '+ this.addressMatch.sec_unit_type_unnumbered + '           \n\
       )'
-  
+
     this.addressMatch.city_and_state = '                       \n\
       (?:                                               \n\
         (?<city>[^\\d,]+?)\\W+                          \n\
         (?<state>'+ this.addressMatch.state + ')                  \n\
       )                                                 \n\
       '
-  
+
     this.addressMatch.place = '                                \n\
       (?:'+ this.addressMatch.city_and_state + '\\W*)?            \n\
       (?:'+ this.addressMatch.zip + ')?                           \n\
       '
-  
+
     this.addressMatch.address = XRegExp('                      \n\
       ^                                                 \n\
       [^\\w\\#]*                                        \n\
@@ -130,9 +130,9 @@ export class AddressParser {
       (?:'+ this.addressMatch.sec_unit + ')?\\W*          #fix2   \n\
           '+ this.addressMatch.place + '                           \n\
       \\W*$', 'ix')
-  
-    var sep = '(?:\\W+|$)' // no support for \Z
-  
+
+    const sep = '(?:\\W+|$)' // no support for \Z
+
     this.addressMatch.informal_address = XRegExp('                   \n\
       ^                                                       \n\
       \\s*                                                    \n\
@@ -143,14 +143,14 @@ export class AddressParser {
       (?:'+ this.addressMatch.sec_unit.replace(/_\d/g, '$&1') + sep + ')?  \n\
       (?:'+ this.addressMatch.place + ')?                               \n\
       ', 'ix')
-  
+
     this.addressMatch.po_address = XRegExp('                         \n\
       ^                                                       \n\
       \\s*                                                    \n\
       (?:'+ this.addressMatch.sec_unit.replace(/_\d/g, '$&1') + sep + ')?  \n\
       (?:'+ this.addressMatch.place + ')?                               \n\
       ', 'ix')
-  
+
     this.addressMatch.intersection = XRegExp('                     \n\
       ^\\W*                                                 \n\
       '+ this.addressMatch.street.replace(/_\d/g, '1$&') + '\\W*?      \n\
@@ -161,37 +161,37 @@ export class AddressParser {
 
   normalizeAddress(parts) {
     const self = this
-  
+
     if (!parts) return null
     const parsed: Record<string, any> = {}
-  
+
     Object.keys(parts).forEach(function (k) {
       // @ts-ignore
       if (['input', 'index'].indexOf(k) !== -1 || isFinite(k)) {
         return
       }
-  
+
       // @ts-ignore
       const key = isFinite(k.split('_').pop())
         ? k.split('_').slice(0, -1).join('_')
         : k
-  
+
       if (parts[k]) {
         parsed[key] = parts[k].trim().replace(/^\s+|\s+$|[^\w\s\-#&]/g, '')
       }
     })
-  
+
     each(normalizeMap, function (map, key) {
       if (parsed[key] && map[parsed[key].toLowerCase()]) {
         parsed[key] = map[parsed[key].toLowerCase()]
       }
     })
-  
+
     ;['type', 'type1', 'type2'].forEach(function (key) {
       if (key in parsed)
         parsed[key] = parsed[key].charAt(0).toUpperCase() + parsed[key].slice(1).toLowerCase()
     })
-  
+
     if (parsed.city) {
       parsed.city = XRegExp.replace(parsed.city,
         XRegExp('^(?<dircode>' + this.addressMatch.dircode + ')\\s+(?=\\S)', 'ix'),
@@ -199,25 +199,25 @@ export class AddressParser {
           return capitalize(self.directionCode[match.dircode.toUpperCase()]) + ' '
         })
     }
-  
+
     return parsed
   }
-  
+
   parseAddress(address) {
     const parts = XRegExp.exec(address, this.addressMatch.address)
     return this.normalizeAddress(parts)
   }
-  
+
   parseInformalAddress(address) {
     const parts = XRegExp.exec(address, this.addressMatch.informal_address)
     return this.normalizeAddress(parts)
   }
-  
+
   parsePoAddress(address) {
     const parts = XRegExp.exec(address, this.addressMatch.po_address)
     return this.normalizeAddress(parts)
   }
-  
+
   parseLocation(address) {
     if (XRegExp(this.addressMatch.corner, 'xi').test(address)) {
       return this.parseIntersection(address)
@@ -228,12 +228,12 @@ export class AddressParser {
     return this.parseAddress(address)
       || this.parseInformalAddress(address)
   }
-  
+
   parseIntersection(address) {
     let parts = XRegExp.exec(address, this.addressMatch.intersection)
     // @ts-ignore
     parts = this.normalizeAddress(parts)
-  
+
     if (parts) {
       parts.type2 = parts.type2 || ''
       parts.type1 = parts.type1 || ''
@@ -247,7 +247,7 @@ export class AddressParser {
         }
       }
     }
-  
+
     return parts
   }
 }
