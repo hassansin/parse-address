@@ -1,12 +1,14 @@
 import assert from 'assert'
-import addressParser from '../address'
 import { testCases } from './test-cases'
+import { AddressParser } from '../src/parser'
 
 describe('Parser', () => {
+  const addressParser = new AddressParser()
+
   it('Properly parses addresses (existing test cases)', () => {
     Object.keys(testCases).forEach((addressString) => {
       const parsed = addressParser.parseLocation(addressString)
-      assert.deepEqual(testCases[addressString], parsed)
+      assert.deepEqual(parsed, testCases[addressString])
     })
   })
 
