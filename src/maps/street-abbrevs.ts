@@ -185,7 +185,7 @@ export const streetAbbrevsToShortCodeMap = {
   DV: 'dv',
   ES: 'est',
   EX: 'expy',
-  FA: 'fl',
+  FA: 'fall',
   FE: 'fry',
   FG: 'frg',
   FI: 'fld',
