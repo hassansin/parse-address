@@ -504,7 +504,7 @@ export const testCases = {
   '9402 Sequoia Fall San Antonio TX 78251': {
     number: '9402',
     street: 'Sequoia',
-    type: 'Fl',
+    type: 'Fall',
     city: 'San Antonio',
     state: 'TX',
     zip: '78251'
@@ -512,7 +512,7 @@ export const testCases = {
   '24411 Alamosa Fls San Antonio TX 78255': {
     number: '24411',
     street: 'Alamosa',
-    type: 'Fls',
+    type: 'Falls',
     city: 'San Antonio',
     state: 'TX',
     zip: '78255'
@@ -520,7 +520,7 @@ export const testCases = {
   '24411 Alamosa Falls San Antonio TX 78255': {
     number: '24411',
     street: 'Alamosa',
-    type: 'Fls',
+    type: 'Falls',
     city: 'San Antonio',
     state: 'TX',
     zip: '78255'
