@@ -9,10 +9,10 @@ This is a Typescript port for the Perl [Geo::StreetAddress::US](http://search.cp
 ## Usage:
 
 ```ts
-import parser from '@bankrate/parse-address'
+import addressParser from '@bankrate/parse-address'
 
 const address = '1005 N Gravenstein Highway Sebastopol CA 95472'
-const parsed = parser.parseLocation(address)
+const parsed = addressParser.parseLocation(address)
 
 // Parsed address:
 {

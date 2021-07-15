@@ -51,9 +51,11 @@ function each(o, fn) {
 
 function invert(o) {
   var o1 = {}
+
   keys(o).forEach(function (k) {
     o1[o[k]] = k
   })
+
   return o1
 }
 
@@ -65,6 +67,7 @@ function lazyInit() {
   if (initialized) {
     return
   }
+
   initialized = true
 
   directionCode = invert(directionsMap)
@@ -251,24 +254,28 @@ parser.normalize_address = function (parts) {
 
 parser.parseAddress = function (address) {
   lazyInit()
+
   const parts = XRegExp.exec(address, addressMatch.address)
   return parser.normalize_address(parts)
 }
 
 parser.parseInformalAddress = function (address) {
   lazyInit()
+
   const parts = XRegExp.exec(address, addressMatch.informal_address)
   return parser.normalize_address(parts)
 }
 
 parser.parsePoAddress = function (address) {
   lazyInit()
+
   const parts = XRegExp.exec(address, addressMatch.po_address)
   return parser.normalize_address(parts)
 }
 
 parser.parseLocation = function (address) {
   lazyInit()
+
   if (XRegExp(addressMatch.corner, 'xi').test(address)) {
     return parser.parseIntersection(address)
   }
