@@ -504,7 +504,7 @@ export const testCases = {
   '9402 Sequoia Fall San Antonio TX 78251': {
     number: '9402',
     street: 'Sequoia',
-    type: 'Fall',
+    type: 'Fl',
     city: 'San Antonio',
     state: 'TX',
     zip: '78251'
