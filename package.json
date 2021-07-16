@@ -4,7 +4,8 @@
   "description": "US Street Address Parser",
   "scripts": {
     "test": "npx jest",
-    "build": "tsc"
+    "build": "tsc",
+    "publish-package": "./publish.sh"
   },
   "repository": {
     "type": "git",
@@ -23,5 +24,8 @@
     "ts-node": "^10.1.0",
     "typescript": "^4.3.5",
     "uglifyjs": "^2.4.11"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }

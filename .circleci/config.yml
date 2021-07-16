@@ -1,0 +1,100 @@
+version: 2
+
+references:
+  container_config: &container_config
+    docker:
+      - image: circleci/node:14.5
+    working_directory: ~/node
+
+jobs:
+  dependencies:
+    <<: *container_config
+    steps:
+      - checkout
+      - run:
+          name: Authenticate npm registry
+          command: echo -e "${ARTIFACTORY_REGISTRY_NAME}:_authToken=${ARTIFACTORY_WRITE_TOKEN}" > .npmrc
+      - run:
+          name: Update npm
+          command: '[[ -d node_modules ]] || sudo npm install -g npm@6.0.1'
+      - run:
+          name: Install Dependencies
+          command: '[[ -d node_modules ]] || npm ci'
+
+  test:
+    <<: *container_config
+    steps:
+      - checkout
+      - run:
+          name: Unit tests
+          command: npm run test
+
+  build:
+    <<: *container_config
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Build project
+          command: npm run build
+
+  publish:
+    <<: *container_config
+    steps:
+      - checkout
+      - run:
+          name: Authenticate npm registry
+          command: echo -e "${ARTIFACTORY_REGISTRY_NAME}:_authToken=${ARTIFACTORY_WRITE_TOKEN}" > .npmrc
+      - run:
+          name: NPM publish
+          command: npm run publish-package none
+
+workflows:
+  version: 2
+
+  default:
+    jobs:
+      - dependencies
+      - build:
+          requires:
+            - dependencies
+      - test:
+          requires:
+            - dependencies
+
+  release:
+    jobs:
+      - dependencies:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+      - build:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+          requires:
+            - dependencies
+      - test:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+          requires:
+            - dependencies
+      - publish:
+          context: prod-environment
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+          requires:
+            - test
+            - build
