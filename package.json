@@ -1,6 +1,6 @@
 {
   "name": "@bankrate/parse-address",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "US Street Address Parser",
   "scripts": {
     "test": "npx jest",
