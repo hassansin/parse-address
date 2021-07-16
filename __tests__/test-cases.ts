@@ -1,4 +1,38 @@
-export const testCases = {
+
+import { AddressTestCaseMap } from '../src/types/address'
+
+export const additionalTests: AddressTestCaseMap = {
+  '4972 SW 91st Aven, Cooper City, FL 33328, USA': {
+    city: 'Cooper City',
+    state: 'FL',
+    number: '4972',
+    prefix: 'SW',
+    street: '91st',
+    type: 'Ave',
+    zip: '33328',
+  },
+  '925 SW 102ND TE, Pembroke Pines, FL 33025, USA': {
+    city: 'Pembroke Pines',
+    state: 'FL',
+    number: '925',
+    prefix: 'SW',
+    street: '102ND',
+    type: 'Ter',
+    zip: '33025',
+  },
+  '3801 S Congress Ave, L216, Austin, TX 78704': {
+    __skipTest: true,
+    city: 'Austin',
+    state: 'TX',
+    number: '3801',
+    prefix: 'S',
+    street: 'Congress',
+    type: 'Ave',
+    zip: '78704',
+  },
+}
+
+export const existingTests: AddressTestCaseMap = {
   '1005 Gravenstein Hwy 95472': {
     number: '1005',
     street: 'Gravenstein',
