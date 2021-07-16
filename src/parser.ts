@@ -13,6 +13,7 @@ import {
   invert,
   values,
   flatten,
+  isNumeric,
   capitalize,
 } from './utils'
 
@@ -165,19 +166,17 @@ export class AddressParser {
     if (!parts) return null
     const parsed: Record<string, any> = {}
 
-    Object.keys(parts).forEach(function (k) {
-      // @ts-ignore
-      if (['input', 'index'].indexOf(k) !== -1 || isFinite(k)) {
+    Object.keys(parts).forEach((part) => {
+      if (['input', 'index'].includes(part) || isNumeric(part)) {
         return
       }
 
-      // @ts-ignore
-      const key = isFinite(k.split('_').pop())
-        ? k.split('_').slice(0, -1).join('_')
-        : k
+      const key = isNumeric(part.split('_').pop())
+        ? part.split('_').slice(0, -1).join('_')
+        : part
 
-      if (parts[k]) {
-        parsed[key] = parts[k].trim().replace(/^\s+|\s+$|[^\w\s\-#&]/g, '')
+      if (parts[part]) {
+        parsed[key] = parts[part].trim().replace(/^\s+|\s+$|[^\w\s\-#&]/g, '')
       }
     })
 

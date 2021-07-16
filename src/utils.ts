@@ -35,3 +35,13 @@ export function invert(o) {
 export function flatten(o) {
   return keys(o).concat(values(o))
 }
+
+export function isNumeric(input: any) {
+  const dataType = typeof input
+
+  if (!['string', 'number'].includes(dataType)) {
+    return false
+  }
+    
+  return !Number.isNaN(Number(input))
+}
