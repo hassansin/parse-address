@@ -1,7 +1,11 @@
 import assert from 'assert'
 import { AddressParser } from '../src/parser'
-import { AddressTestCaseMap } from '../src/types/address'
 import { existingTests, additionalTests } from './test-cases'
+
+import {
+  AddressTestCase,
+  AddressTestCaseMap,
+} from '../src/types/address'
 
 const addressParser = new AddressParser()
 
@@ -19,7 +23,7 @@ describe('Parser', () => {
 
 function runTests(tests: AddressTestCaseMap) {
   return function runTestsCurried(addressString) {
-    const testCase = tests[addressString]
+    const testCase = tests[addressString] as AddressTestCase
 
     if (testCase.__skipTest) {
       return

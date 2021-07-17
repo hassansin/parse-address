@@ -1,10 +1,11 @@
 {
   "name": "@bankrate/parse-address",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "US Street Address Parser",
+  "main": "dist/parser.js",
   "scripts": {
     "test": "npx jest",
-    "build": "tsc",
+    "build": "rm -rf ./dist && tsc",
     "publish-package": "./publish.sh"
   },
   "repository": {
@@ -24,8 +25,5 @@
     "ts-node": "^10.1.0",
     "typescript": "^4.3.5",
     "uglifyjs": "^2.4.11"
-  },
-  "files": [
-    "dist"
-  ]
+  }
 }
