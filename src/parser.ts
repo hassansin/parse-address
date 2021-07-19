@@ -189,11 +189,11 @@ export class AddressParser {
 
     ;['type', 'type1', 'type2'].forEach(function (key) {
       if (key in parsed) {
-        parsed[key] = parsed[key].charAt(0).toUpperCase() + parsed[key].slice(1).toLowerCase()
-
         // Map the address short code
         const lowerCaseType = parsed[key].toLowerCase()
         parsed[`short_street_${key}`] = self.findStreetTypeShortCode(lowerCaseType)
+
+        parsed[key] = parsed[key].charAt(0).toUpperCase() + parsed[key].slice(1).toLowerCase()
       }
     })
 
@@ -247,10 +247,12 @@ export class AddressParser {
 
       if (parts.type2 && !parts.type1 || (parts.type1 === parts.type2)) {
         let type = parts.type2
+        const short_street_type = parts.short_street_type2
         type = XRegExp.replace(type, /s\W*$/, '')
 
         if (XRegExp('^' + this.addressMatch.type + '$', 'ix').test(type)) {
           parts.type1 = parts.type2 = type
+          parts.short_street_type1 = parts.short_street_type2 = short_street_type
         }
       }
     }

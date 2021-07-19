@@ -166,6 +166,12 @@ export const existingTests: AddressTestCaseMap = {
     short_street_type: 'HY',
     state: 'CA'
   },
+  '115 Broadway San Francisco CA': {
+    number: '115',
+    street: 'Broadway',
+    city: 'San Francisco',
+    state: 'CA'
+  },
   '7800 Mill Station Rd, Sebastopol, CA 95472': {
     number: '7800',
     street: 'Mill Station',
@@ -184,6 +190,13 @@ export const existingTests: AddressTestCaseMap = {
     short_street_type: 'RD',
     zip: '95472'
   },
+  '1005 State Highway 116 Sebastopol CA 95472': {
+    number: '1005',
+    street: 'State Highway 116',
+    city: 'Sebastopol',
+    state: 'CA',
+    zip: '95472'
+  },
   '1600 Pennsylvania Ave. Washington DC': {
     number: '1600',
     street: 'Pennsylvania',
@@ -199,6 +212,36 @@ export const existingTests: AddressTestCaseMap = {
     city: 'Washington',
     short_street_type: 'AV',
     state: 'DC'
+  },
+  '48S 400E, Salt Lake City UT': {
+    number: '48',
+    prefix: 'S',
+    street: '400',
+    suffix: 'E',
+    city: 'Salt Lake City',
+    state: 'UT'
+  },
+  '550 S 400 E #3206, Salt Lake City UT 84111': {
+    number: '550',
+    prefix: 'S',
+    street: '400',
+    suffix: 'E',
+    sec_unit_type: '#',
+    sec_unit_num: '3206',
+    city: 'Salt Lake City',
+    state: 'UT',
+    zip: '84111'
+  },
+  '6641 N 2200 W Apt D304 Park City, UT 84098': {
+    number: '6641',
+    prefix: 'N',
+    street: '2200',
+    suffix: 'W',
+    sec_unit_type: 'Apt',
+    sec_unit_num: 'D304',
+    city: 'Park City',
+    state: 'UT',
+    zip: '84098'
   },
   '100 South St, Philadelphia, PA': {
     number: '100',
@@ -225,6 +268,98 @@ export const existingTests: AddressTestCaseMap = {
     short_street_type: 'RD',
     state: 'CA'
   },
+  'Mission & Valencia San Francisco CA': {
+    street1: 'Mission',
+    street2: 'Valencia',
+    city: 'San Francisco',
+    state: 'CA',
+    type2: '',
+    type1: ''
+  },
+  'Mission & Valencia, San Francisco CA': {
+    street1: 'Mission',
+    street2: 'Valencia',
+    city: 'San Francisco',
+    state: 'CA',
+    type2: '',
+    type1: ''
+  },
+  'Mission St and Valencia St San Francisco CA': {
+    street1: 'Mission',
+    type1: 'St',
+    street2: 'Valencia',
+    type2: 'St',
+    city: 'San Francisco',
+    state: 'CA',
+    short_street_type1: 'ST',
+    short_street_type2: 'ST'
+  },
+  'Mission St and Valencia St': {
+    street1: 'Mission',
+    type1: 'St',
+    street2: 'Valencia',
+    type2: 'St',
+    short_street_type1: 'ST',
+    short_street_type2: 'ST'
+  },
+  'Mission St & Valencia St San Francisco CA': {
+    street1: 'Mission',
+    type1: 'St',
+    street2: 'Valencia',
+    type2: 'St',
+    city: 'San Francisco',
+    state: 'CA',
+    short_street_type1: 'ST',
+    short_street_type2: 'ST'
+  },
+  'Mission and Valencia Sts San Francisco CA': {
+    street1: 'Mission',
+    street2: 'Valencia',
+    type2: 'St',
+    city: 'San Francisco',
+    state: 'CA',
+    type1: 'St',
+    short_street_type1: 'ST',
+    short_street_type2: 'ST'
+  },
+  'Mission & Valencia Sts. San Francisco CA': {
+    street1: 'Mission',
+    street2: 'Valencia',
+    type2: 'St',
+    city: 'San Francisco',
+    state: 'CA',
+    type1: 'St',
+    short_street_type1: 'ST',
+    short_street_type2: 'ST'
+  },
+  'Mission and Valencia Sts.': {
+    street1: 'Mission',
+    type1: 'St',
+    street2: 'Valencia',
+    type2: 'St',
+    short_street_type1: 'ST',
+    short_street_type2: 'ST'
+  },
+  'Mission & Valencia Streets San Francisco CA': {
+    street1: 'Mission',
+    street2: 'Valencia',
+    type2: 'St',
+    city: 'San Francisco',
+    state: 'CA',
+    type1: 'St',
+    short_street_type1: 'ST',
+    short_street_type2: 'ST'
+  },
+  'Mission Avenue and Valencia Street San Francisco CA': {
+    street1: 'Mission',
+    type1: 'Ave',
+    street2: 'Valencia',
+    type2: 'St',
+    city: 'San Francisco',
+    state: 'CA',
+    short_street_type1: 'AV',
+    short_street_type2: 'ST'
+  },
   '1 First St, e San Jose CA': {
     number: '1',
     street: 'First',
@@ -232,6 +367,12 @@ export const existingTests: AddressTestCaseMap = {
     city: 'East San Jose',
     short_street_type: 'ST',
     state: 'CA'
+  },
+  '123 Maple Rochester, New York': {
+    number: '123',
+    street: 'Maple',
+    city: 'Rochester',
+    state: 'NY'
   },
   '233 S Wacker Dr 60606-6306': {
     number: '233',
@@ -306,7 +447,27 @@ export const existingTests: AddressTestCaseMap = {
     short_street_type: 'RD',
     state: 'LA'
   },
-  "'45 Quaker Ave, Ste 105'": {
+  '36401 County Road 43, Eaton, CO 80615': {
+    number: '36401',
+    street: 'County Road 43',
+    city: 'Eaton',
+    state: 'CO',
+    zip: '80615'
+  },
+  '1234 COUNTY HWY 60E, Town, CO 12345': {
+    number: '1234',
+    street: 'COUNTY HWY 60',
+    suffix: 'E',
+    city: 'Town',
+    state: 'CO',
+    zip: '12345'
+  },
+  '321 S. Washington': {
+    number: '321',
+    prefix: 'S',
+    street: 'Washington'
+  },
+  '\'45 Quaker Ave, Ste 105\'': {
     number: '45',
     street: 'Quaker',
     type: 'Ave',
@@ -322,6 +483,27 @@ export const existingTests: AddressTestCaseMap = {
     state: 'MI',
     short_street_type: 'RO',
     zip: '48084'
+  },
+  'Post office Box 3094 Collierville TN 38027': {
+    sec_unit_type: 'Post office Box',
+    sec_unit_num: '3094',
+    city: 'Collierville',
+    state: 'TN',
+    zip: '38027'
+  },
+  'P.O. box 3094 Collierville TN 38027': {
+    sec_unit_type: 'PO box',
+    sec_unit_num: '3094',
+    city: 'Collierville',
+    state: 'TN',
+    zip: '38027'
+  },
+  'POBox 3094 Collierville TN 38027': {
+    sec_unit_type: 'POBox',
+    sec_unit_num: '3094',
+    city: 'Collierville',
+    state: 'TN',
+    zip: '38027'
   },
   'N95W18855 Jay Dr, Menomonee Falls, WI 53051': {
     number: 'N95W18855',

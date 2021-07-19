@@ -15,6 +15,8 @@ export interface ParsedAddress {
   zip?: string
   plus4?: string
   short_street_type?: string
+  short_street_type1?: string
+  short_street_type2?: string
 }
 
 export interface AddressTestCase extends ParsedAddress {
