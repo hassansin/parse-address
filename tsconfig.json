@@ -15,7 +15,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
-    "noPropertyAccessFromIndexSignature": true,
     "noEmitOnError": true,
     "useDefineForClassFields": true,
     "esModuleInterop": true,
@@ -24,5 +23,5 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": ["**.ts", "**/*.ts"],
-  "exclude": ["node_modules", "**/*.spec.ts", "__tests__/**"]
+  "exclude": ["node_modules", "**/*.spec.ts", "__tests__/**", "dist"]
 }
